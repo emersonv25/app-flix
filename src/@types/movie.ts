@@ -1,6 +1,6 @@
 export type Movie ={
     movieKey?: string,
-    title: string,
+    title?: string,
     description?: string,
     path?: string,
     posterImg?: string,

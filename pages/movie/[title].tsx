@@ -1,23 +1,29 @@
-import { Container } from "@mui/material";
+import { Box, CircularProgress, Container } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { Context } from "vm";
+import { Movie } from "../../src/@types/movie";
+import { getMoviesByKey } from "../../src/services";
 
 // site.com/movie/one-piece
-export const getStaticPaths : GetStaticPaths<{title: string}> = async () => {
-	return {
-		paths: [{ params: { title: 'one piece' } }, { params: {title: 'naruto'}}],
-		fallback: true,
-	};
+export const getStaticPaths: GetStaticPaths<{ title: string }> = async () => {
+    return {
+        paths: [{ params: { title: 'one-piece' } }],
+        fallback: true,
+    };
 };
 
-export const getStaticProps: GetStaticProps = async (context : Context) => {
-    const title : string =  context.params.title;
-    console.log(title)
+export const getStaticProps: GetStaticProps = async (context: Context) => {
+    const key: string = context.params.title;
+    let movie: Movie = {}
+    movie = await getMoviesByKey(key);
+
     return {
         props: {
-            title : `${title} - ${new Date().getSeconds()}`
+            movie: movie
         }, // will be passed to the page component as props
-        revalidate: 10
+        revalidate: 60
     }
 }
 
@@ -25,17 +31,48 @@ export const getStaticProps: GetStaticProps = async (context : Context) => {
 
 
 type Props = {
-    title: string
+    movie: Movie
 }
 
-const Title: NextPage<Props> = ({ title } : Props) => {
+const Title: NextPage<Props> = ({ movie }: Props) => {
+    const isMovie = () => {
+        if (JSON.stringify(movie) === "{}" || typeof movie === "undefined") {
+            return false
+        } else { return true }
+    }
+    const router = useRouter()
 
-    return (
-        <Container>
-            {title}
-            <h1>Está é a pagina sobre mais informações </h1>
-        </Container>
-    )
+    if (router.isFallback) {
+        return <>
+            <Container maxWidth='xs'>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight:'100vh' }}>
+                    <CircularProgress />
+                </Box>
+            </Container>
+        </>
+    }
+    else {
+        return (
+            <>
+                {
+                    !isMovie() &&
+                    <Container>
+                        <h3>Nenhum resultado encontrado</h3>
+                    </Container>
+                }
+                {
+                    isMovie() &&
+                    <Container>
+                        <Head>
+                            <title>{`Assistir ${movie.title} Todos os Episódios Online`}</title>
+                            <meta name='description' content={movie.description} />
+                        </Head>
+                        {JSON.stringify(movie)}
+                    </Container>
+                }
+            </>
+        )
+    }
 }
 
 export default Title

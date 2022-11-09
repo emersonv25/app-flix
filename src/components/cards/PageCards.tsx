@@ -14,7 +14,7 @@ export default function PageCards({ arrayCards }: PageCardsProps) {
             >
                 {arrayCards.map((card, key) =>
                     <Grid key={key} item xs={6} sm={4} md={3} lg={2}>
-                        <CardPoster key={key} title={`${card.title}`} posterImg={`${card.posterImg}`}></CardPoster>
+                        <CardPoster key={key} movie={card}></CardPoster>
                     </Grid>
                 )}
             </Grid>

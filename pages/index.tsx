@@ -3,27 +3,27 @@ import { Box, Container } from "@mui/material";
 import { Movie } from '../src/@types/movie';
 import CarouselCards from "../src/components/cards/CarouselCards";
 import PageCards from "../src/components/cards/PageCards";
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import { getMovies } from '../src/services/api';
-import { useEffect, useState } from 'react';
-import { useDebounce } from '../src/hooks/useDebounce';
 
 
-const Home: NextPage = () => {
-    const [movieList, setMovieList] = useState<Movie[]>([])
-    const {debounce} = useDebounce();
+export const getStaticProps: GetStaticProps = async () => {
+    const movies : Movie[] = await getMovies()
 
-    const getMovieList = async () => {
-        await getMovies().then(resp => { setMovieList(resp) }).catch(ex => { console.log(ex) })
+    return {
+        props: {
+            movies: movies
+        },
+        revalidate: 10
     }
+}
 
-    useEffect(() => {
-        debounce(() => {
-            console.log('getmovielist')
-            getMovieList()
-        })
-    }, [])
 
+type Props = {
+    movies: Movie[]
+}
+
+const Home: NextPage<Props> = ({movies} : Props) => {
     return (
         <>
             <Box>
@@ -31,10 +31,10 @@ const Home: NextPage = () => {
                     <h2>Melhores</h2>
                     <Box>
                         {
-                            movieList.length == 0 && <h3>Nenhum conteudo encontrado</h3>
+                            movies.length == 0 && <h3>Nenhum conteudo encontrado</h3>
                         }
                         {
-                            movieList && <CarouselCards arrayCards={movieList} ></CarouselCards>
+                            movies && <CarouselCards arrayCards={movies} ></CarouselCards>
                         }
 
                     </Box>
@@ -42,10 +42,10 @@ const Home: NextPage = () => {
                 <Container maxWidth='xl'>
                     <h2>Lançamentos</h2>
                     {
-                        movieList.length == 0 && <h3>Nenhum conteudo encontrado</h3>
+                        movies.length == 0 && <h3>Nenhum conteudo encontrado</h3>
                     }
                     {
-                        movieList && <PageCards arrayCards={movieList} ></PageCards>
+                        movies && <PageCards arrayCards={movies} ></PageCards>
                     }
                 </Container>
             </Box>

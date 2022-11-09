@@ -26,7 +26,7 @@ export default function CarouselCards({ arrayCards }: CarouselCardsProps) {
             >
                 {arrayCards.map((card, key) =>
                     <SwiperSlide key={key}>
-                        <CardPoster title={`${card.title}`} posterImg={`${card.posterImg}`}></CardPoster>
+                        <CardPoster movie={card}></CardPoster>
                     </SwiperSlide>
                 )}
             </Swiper>

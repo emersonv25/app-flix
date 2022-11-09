@@ -34,7 +34,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                                 <MenuDrawer menus={menus} />
 
                                 <Typography variant='h6' m='auto' style={{ flexGrow: 0, justifyContent: 'start' }}>
-                                    PkapaFlix
+                                    {process.env.NEXT_PUBLIC_WEBSITE_TITLE}
                                 </Typography>
 
                                 <Stack direction="row" style={{ flexGrow: 1, justifyContent: 'center' }} display={{ xs: 'none', md: 'flex' }}>
