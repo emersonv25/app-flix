@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { CardInfo } from '../../@types/cardInfo';
+import { Movie } from '../../@types/movie';
 import CardPoster from './CardPoster';
 import { Navigation } from "swiper";
 import "swiper/css";
@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 type CarouselCardsProps = {
-    arrayCards: CardInfo[]
+    arrayCards: Movie[]
 }
 export default function CarouselCards({ arrayCards }: CarouselCardsProps) {
     return (
@@ -26,7 +26,7 @@ export default function CarouselCards({ arrayCards }: CarouselCardsProps) {
             >
                 {arrayCards.map((card, key) =>
                     <SwiperSlide key={key}>
-                        <CardPoster title={`${card.title}`} image={`${card.image}`}></CardPoster>
+                        <CardPoster title={`${card.title}`} posterImg={`${card.posterImg}`}></CardPoster>
                     </SwiperSlide>
                 )}
             </Swiper>

@@ -1,5 +1,7 @@
 import axios from "axios";
+import { Movie } from "../@types/movie";
 
+// Auth
 export async function loginUser(username: string, password: string)
 {
   const response = await axios.post(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/auth/login', {
@@ -25,4 +27,14 @@ export async function updateProfile(username: string, fullName: string, email: s
     username: username, fullName: fullName, email: email, password: password
   })
   return response.data
+}
+
+// FLIX
+
+export async function getMovies()
+{
+  const response = await axios.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/movies')
+  const movies: Movie[] = response.data
+
+  return movies
 }

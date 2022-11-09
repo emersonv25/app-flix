@@ -29,7 +29,6 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }: IAuthPr
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            console.log('useeffect')
             const storagedToken = localStorage.getItem("access_token")
             if (storagedToken) {
                 try {
