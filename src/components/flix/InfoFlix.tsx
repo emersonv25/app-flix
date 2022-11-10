@@ -30,6 +30,9 @@ export default function InfoFlix({ movie }: Props) {
                                             <Chip key={key} label={name} size="small" sx={{ m: 0.5 }} />
                                         )}
                                     </Grid>
+                                    <Typography variant="subtitle1" color="text.secondary" component="div" mt={2} sx={{display: { xs: 'none', sm: 'flex' }}}>
+                                        {movie.description}
+                                    </Typography>
                                 </CardContent>
 
                             </Box>
@@ -37,7 +40,7 @@ export default function InfoFlix({ movie }: Props) {
 
                         <Divider sx={{ p: 1 }}></Divider>
 
-                        <Box sx={{ display: 'flex', pl: 1, pr: 1 }} >
+                        <Box sx={{ display: {xs: 'flex', sm: 'none'}, pl: 1, pr: 1 }} >
                             <Typography variant="subtitle1" color="text.secondary" component="div" mt={2}>
                                 {movie.description}
                             </Typography>

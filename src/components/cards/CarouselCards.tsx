@@ -36,9 +36,13 @@ export default function CarouselCards({ arrayCards }: CarouselCardsProps) {
 
 //xs={6} sm={4} md={3} lg={2}
 const swiperBreakPoints = {
+    //xl
+    1536:{
+        slidesPerView: 6
+    },
     //lg
     1200: {
-        slidesPerView: 6,
+        slidesPerView: 4,
     },
     //md
     900: {
