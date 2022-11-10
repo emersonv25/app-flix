@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Movie } from '../../@types/movie';
 import Link from 'next/link';
-import Image from 'next/image'
 
 type Props = {
     movie: Movie
