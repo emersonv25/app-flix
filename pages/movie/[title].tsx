@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Context } from "vm";
 import { Movie } from "../../src/@types/movie";
+import InfoFlix from "../../src/components/flix/InfoFlix";
 import { getMoviesByKey } from "../../src/services";
 
 // site.com/movie/one-piece
@@ -45,7 +46,7 @@ const Title: NextPage<Props> = ({ movie }: Props) => {
     if (router.isFallback) {
         return <>
             <Container maxWidth='xs'>
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight:'100vh' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
                     <CircularProgress />
                 </Box>
             </Container>
@@ -53,7 +54,7 @@ const Title: NextPage<Props> = ({ movie }: Props) => {
     }
     else {
         return (
-            <>
+            <Box>
                 {
                     !isMovie() &&
                     <Container>
@@ -62,15 +63,18 @@ const Title: NextPage<Props> = ({ movie }: Props) => {
                 }
                 {
                     isMovie() &&
-                    <Container>
+                    <>
                         <Head>
                             <title>{`Assistir ${movie.title} Todos os Episódios Online`}</title>
                             <meta name='description' content={movie.description} />
                         </Head>
-                        {JSON.stringify(movie)}
-                    </Container>
+                        <Container sx={{ pt: '50px' }}>
+                            <InfoFlix movie={movie} />
+                        </Container>
+                    </>
+
                 }
-            </>
+            </Box>
         )
     }
 }

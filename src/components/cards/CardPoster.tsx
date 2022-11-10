@@ -12,12 +12,11 @@ type Props = {
 
 const CardPoster = ({movie} : Props) => {
     return (
-        <Card sx={{ display:'flex', margin: 1, maxWidth: 220, borderRadius: 3}} elevation={0}>
+        <Card sx={{ display:'flex', margin: 1, maxWidth: 220, borderRadius: 4}} elevation={0}>
             <CardActionArea component={Link} href={`movie/${movie.movieKey}`}>
                 <CardMedia 
                     component="img"
-                    height="330"
-                    width="100%"
+                    sx={{ width: 220, height: 330 }}
                     image={`${movie.posterImg}`}
                 />
                 <CardContent sx={{ maxHeight: 40, padding: 1 }}>
