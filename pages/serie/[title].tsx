@@ -3,11 +3,11 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Context } from "vm";
-import { Movie } from "../../src/@types/movie";
-import InfoFlix from "../../src/components/flix/InfoFlix";
-import { getMoviesByKey } from "../../src/services";
+import { Serie } from "../../src/@types/serie";
+import CardSerie from "../../src/components/cards/CardSerie";
+import { getSeriesByKey } from "../../src/services";
 
-// site.com/movie/one-piece
+// site.com/serie/one-piece
 export const getStaticPaths: GetStaticPaths<{ title: string }> = async () => {
     return {
         paths: [{ params: { title: 'one-piece' } }],
@@ -17,27 +17,23 @@ export const getStaticPaths: GetStaticPaths<{ title: string }> = async () => {
 
 export const getStaticProps: GetStaticProps = async (context: Context) => {
     const key: string = context.params.title;
-    let movie: Movie = {}
-    movie = await getMoviesByKey(key);
+    const serie = await getSeriesByKey(key);
 
     return {
         props: {
-            movie: movie
-        }, // will be passed to the page component as props
+            serie: serie
+        },
         revalidate: 60
     }
 }
 
-// site.com/1
-
-
 type Props = {
-    movie: Movie
+    serie: Serie
 }
 
-const Title: NextPage<Props> = ({ movie }: Props) => {
-    const isMovie = () => {
-        if (JSON.stringify(movie) === "{}" || typeof movie === "undefined") {
+const Title: NextPage<Props> = ({ serie }: Props) => {
+    const isSerie = () => {
+        if (JSON.stringify(serie) === "{}" || typeof serie === "undefined") {
             return false
         } else { return true }
     }
@@ -56,20 +52,21 @@ const Title: NextPage<Props> = ({ movie }: Props) => {
         return (
             <Box>
                 {
-                    !isMovie() &&
+                    !isSerie() &&
                     <Container>
                         <h3>Nenhum resultado encontrado</h3>
                     </Container>
                 }
                 {
-                    isMovie() &&
+                    isSerie() &&
                     <>
                         <Head>
-                            <title>{`Assistir ${movie.title} Todos os Episódios Online`}</title>
-                            <meta name='description' content={movie.description} />
+                            <title>{`Assistir ${serie.title} Todos os Episódios Online`}</title>
+                            <meta name='description' content={serie.description} />
                         </Head>
-                        <Container sx={{ pt: '50px' }}>
-                            <InfoFlix movie={movie} />
+                        
+                        <Container sx={{ pt: '35px' }}>
+                            <CardSerie serie={serie} />
                         </Container>
                     </>
 

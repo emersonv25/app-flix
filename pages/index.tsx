@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Box, Container } from "@mui/material";
-import { Movie } from '../src/@types/movie';
+import { Serie } from '../src/@types/serie';
 import CarouselCards from "../src/components/cards/CarouselCards";
 import PageCards from "../src/components/cards/PageCards";
 import { GetStaticProps, NextPage } from 'next';
-import { getMovies } from '../src/services/api';
+import { getSeries } from '../src/services/api';
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const movies : Movie[] = await getMovies()
+    const series : Serie[] = await getSeries()
 
     return {
         props: {
-            movies: movies
+            series: series
         },
         revalidate: 10
     }
@@ -20,10 +20,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 type Props = {
-    movies: Movie[]
+    series: Serie[]
 }
 
-const Home: NextPage<Props> = ({movies} : Props) => {
+const Home: NextPage<Props> = ({series} : Props) => {
     return (
         <>
             <Box>
@@ -31,10 +31,10 @@ const Home: NextPage<Props> = ({movies} : Props) => {
                     <h2>Melhores</h2>
                     <Box>
                         {
-                            movies.length == 0 && <h3>Nenhum conteudo encontrado</h3>
+                            series.length == 0 && <h3>Nenhum conteudo encontrado</h3>
                         }
                         {
-                            movies && <CarouselCards arrayCards={movies} ></CarouselCards>
+                            series && <CarouselCards arrayCards={series} ></CarouselCards>
                         }
 
                     </Box>
@@ -42,10 +42,10 @@ const Home: NextPage<Props> = ({movies} : Props) => {
                 <Container maxWidth='xl'>
                     <h2>Lançamentos</h2>
                     {
-                        movies.length == 0 && <h3>Nenhum conteudo encontrado</h3>
+                        series.length == 0 && <h3>Nenhum conteudo encontrado</h3>
                     }
                     {
-                        movies && <PageCards arrayCards={movies} ></PageCards>
+                        series && <PageCards arrayCards={series} ></PageCards>
                     }
                 </Container>
             </Box>

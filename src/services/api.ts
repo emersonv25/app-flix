@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Movie } from "../@types/movie";
+import { Serie } from "../@types/serie";
 import https from 'https'
 
 const api = axios.create({
@@ -38,25 +38,25 @@ export async function updateProfile(username: string, fullName: string, email: s
 
 // FLIX
 
-export async function getMovies()
+export async function getSeries()
 {
-  let movies : Movie[] = []
+  let series : Serie[] = []
   try{
-    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/movies')
-    movies = response.data
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series')
+    series = response.data
   }
-  catch(err : any){ console.log('Error ao consumir api getMovies ' + err.code) }
+  catch(err : any){ console.log('Error ao consumir api getSeries ' + err.code) }
 
-  return movies
+  return series
 }
 
-export async function getMoviesByKey(key : string)
+export async function getSeriesByKey(key : string)
 {
-  let movie : Movie = {}
+  let serie : Serie = {} as any;
   try{
-    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/movies/' + key)
-    movie = response.data
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series/' + key)
+    serie = response.data
   }
-  catch(err : any){ console.log('Err: getMoviesByKey: ' + key + ' : ' + err.response.data) }
-  return movie
+  catch(err : any){ console.log('Err: getSeriesByKey: ' + key + ' : ' + err.response.data) }
+  return serie
 }

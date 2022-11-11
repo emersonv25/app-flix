@@ -1,9 +1,9 @@
 import { Box, Grid, Pagination } from "@mui/material";
-import { Movie } from "../../@types/movie";
+import { Serie } from "../../@types/serie";
 import CardPoster from "./CardPoster";
 
 type PageCardsProps = {
-    arrayCards: Movie[]
+    arrayCards: Serie[]
 }
 export default function PageCards({ arrayCards }: PageCardsProps) {
     return (
@@ -14,7 +14,7 @@ export default function PageCards({ arrayCards }: PageCardsProps) {
             >
                 {arrayCards.map((card, key) =>
                     <Grid key={key} item xs={6} sm={4} md={3} xl={2}>
-                        <CardPoster key={key} movie={card}></CardPoster>
+                        <CardPoster key={key} serie={card}></CardPoster>
                     </Grid>
                 )}
             </Grid>
