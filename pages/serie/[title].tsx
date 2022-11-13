@@ -6,7 +6,7 @@ import { Context } from "vm";
 import { Serie } from "../../src/@types/serie";
 import CardEpisode from "../../src/components/cards/CardEpisode";
 import CardSerie from "../../src/components/cards/CardSerie";
-import { getSeriesByKey } from "../../src/services";
+import { getSerieByKey } from "../../src/services";
 
 // site.com/serie/one-piece
 export const getStaticPaths: GetStaticPaths<{ title: string }> = async () => {
@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths<{ title: string }> = async () => {
 
 export const getStaticProps: GetStaticProps = async (context: Context) => {
     const key: string = context.params.title;
-    const serie = await getSeriesByKey(key);
+    const serie = await getSerieByKey(key);
 
     return {
         props: {
@@ -82,11 +82,11 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                                             </Grid>
                                         )
                                     }
+
                                 </Grid>
                             </Box>
                         </Container>
                     </>
-
                 }
             </Box>
         )

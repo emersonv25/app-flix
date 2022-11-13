@@ -2,6 +2,7 @@
 import { AppBar, Box, Button, Container, Divider, Icon, IconButton, TextField, Toolbar, Typography } from '@mui/material'
 import { Stack } from '@mui/system';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Menu } from '../../@types/menu';
 import useAppTheme from '../../hooks/useAppTheme';
@@ -22,8 +23,15 @@ const menus: Menu[] = [
 // latest, most views, most likes
 export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
     const [searchDisplay, setSearchDisplay] = useState(false);
+    const [search, setSearch] = useState('');
     const appTheme = useAppTheme();
     const themeName = appTheme.themeName;
+    const router = useRouter()
+
+    function goSearch (){
+        router.push('/search/' + search);
+    }
+
     return (
         <>
             <Box width="100%">
@@ -50,10 +58,12 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                                         variant='standard'
                                         InputLabelProps={{ style: { padding: '0 15px', color: 'white' } }}
                                         InputProps={{ disableUnderline: true }}
-                                        style={{ backgroundColor: 'rgba(255,255,255,0.2)' ,borderRadius: 25, width: '100%', padding: '0  10px' }}>
-
+                                        style={{ backgroundColor: 'rgba(255,255,255,0.2)' ,borderRadius: 25, width: '100%', padding: '0  10px' }}
+                                        value={search}
+                                        onChange={(e) => setSearch(e.target.value)}                        
+                                        >
                                     </TextField>
-                                    <IconButton color='inherit'>
+                                    <IconButton color='inherit'  onClick={goSearch}>
                                         <Icon>search</Icon>
                                     </IconButton>
                                 </Box>
@@ -90,10 +100,13 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                             variant='standard'
                             InputLabelProps={{ style: { padding: '0 15px' } }}
                             InputProps={{ disableUnderline: true }}
-                            style={{ backgroundColor: themeName == 'dark' ? 'rgba(255,255,255,0.2)' : 'pink', borderRadius: 25, width: '100%', padding: '0  10px' }}>
+                            style={{ backgroundColor: themeName == 'dark' ? 'rgba(255,255,255,0.2)' : 'pink', borderRadius: 25, width: '100%', padding: '0  10px' }}
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}                  
+                            >
 
                         </TextField>
-                        <IconButton color='inherit'>
+                        <IconButton color='inherit' onClick={goSearch}>
                             <Icon>search</Icon>
                         </IconButton>
                         <IconButton color='inherit' onClick={() => setSearchDisplay(false)}>

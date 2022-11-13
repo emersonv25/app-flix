@@ -50,7 +50,7 @@ export async function getSeries()
   return series
 }
 
-export async function getSeriesByKey(key : string)
+export async function getSerieByKey(key : string)
 {
   let serie : Serie = {} as any;
   try{
@@ -59,4 +59,19 @@ export async function getSeriesByKey(key : string)
   }
   catch(err : any){ console.log('Err: getSeriesByKey: ' + key + ' : ' + err.response.data) }
   return serie
+}
+
+export async function getSeriesByName(name : string)
+{
+  let series : Serie[] = [];
+
+  series.map((episode) => {
+
+  } )
+  try{
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series/search', {params: {name: name}})
+    series = response.data
+  }
+  catch(err : any){ console.log('Err: getSeriesByName ' + name + ' : ' + err) }
+  return series
 }
