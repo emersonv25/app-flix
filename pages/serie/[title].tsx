@@ -1,9 +1,10 @@
-import { Box, CircularProgress, Container } from "@mui/material";
+import { Box, CircularProgress, Container, Grid } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Context } from "vm";
 import { Serie } from "../../src/@types/serie";
+import CardEpisode from "../../src/components/cards/CardEpisode";
 import CardSerie from "../../src/components/cards/CardSerie";
 import { getSeriesByKey } from "../../src/services";
 
@@ -64,9 +65,25 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                             <title>{`Assistir ${serie.title} Todos os Episódios Online`}</title>
                             <meta name='description' content={serie.description} />
                         </Head>
-                        
+
                         <Container sx={{ pt: '35px' }}>
+
                             <CardSerie serie={serie} />
+
+                            <Box display='flex'>
+                                <Grid
+                                    container
+                                    justifyContent="flex-start"
+                                >
+                                    {
+                                        serie.seasons[0].episodes.map((episode, key) =>
+                                            <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
+                                                <CardEpisode key={key} episode={episode}></CardEpisode>
+                                            </Grid>
+                                        )
+                                    }
+                                </Grid>
+                            </Box>
                         </Container>
                     </>
 

@@ -13,14 +13,14 @@ type Props = {
 const CardPoster = ({ serie }: Props) => {
     console
     return (
-        <Card sx={{ display: 'flex', margin: 1, maxWidth: 260, maxHeight: 330, borderRadius: 4 }} elevation={0}>
+        <Card sx={{ display: 'flex', margin: 1, maxWidth: 200, maxHeight: 340, borderRadius: 4, background: 'transparent' }} elevation={0}>
             <CardActionArea component={Link} href={`serie/${serie.serieKey}`}>
                 <CardMedia
                     component="img"
                     sx={{ width: 1.0, maxHeight: 300 }}
                     image={`${serie.posterImg}`}
                 />
-                <CardContent sx={{ height: 40, padding: 1 }}>
+                <CardContent sx={{ height: 50, padding: 1 }}>
                     <Typography gutterBottom variant="subtitle1" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden' align="left">
                         {serie.title}
                     </Typography>

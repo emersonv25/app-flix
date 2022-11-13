@@ -9,8 +9,7 @@ type Props = {
 export default function CardSerie({ serie }: Props) {
     return (
         <>
-            <Card sx={{ display: 'flex', borderRadius: 3 }}>
-                <Container>
+            <Card sx={{ display: 'flex', borderRadius: 3, background: 'transparent'}} elevation={0}>
                     <Box sx={{ display: 'flex', pt: 3, pb: 3 }}>
                         <Box sx={{ display: 'flex', pl: 1, pr: 1, flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'center', md: 'start' } }}>
                             <CardMedia
@@ -40,23 +39,6 @@ export default function CardSerie({ serie }: Props) {
                             </Box>
                         </Box>
                     </Box>
-
-                    <Box display='flex'>
-                        <Grid
-                            container
-                            justifyContent="flex-start"
-                        >
-                            {
-                                serie.seasons[0].episodes.map((episode, key) =>
-                                    <Grid key={key} item xs={12} sm={6} md={4}>
-                                            <CardEpisode key={key} episode={episode}></CardEpisode>
-                                    </Grid>
-                                )
-                            }
-                        </Grid>
-
-                    </Box>
-                </Container>
             </Card>
         </>
     );

@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { Box, CardActionArea } from '@mui/material';
 import { Episode } from '../../@types/serie';
 import Link from 'next/link';
 
@@ -12,23 +12,28 @@ type Props = {
 
 const CardEpisode = ({ episode }: Props) => {
     return (
-        <Card sx={{ display: 'flex', margin: 1, maxWidth: 300, maxHeight: 230}} elevation={0}>
-            <CardActionArea component={Link} href={`/watch/${episode.episodeKey}`}>
-                <CardMedia
-                    component="img"
-                    sx={{ width: 1.0, maxHeight: 170}}
-                    image={`https://animesbr.biz/wp-content/uploads/2021/06/tLxA678OEJIsdNPPVZkAH8U4f8L-300x170.jpg`}
-                />
-                <CardContent sx={{ maxHeight: 60, padding: 1 }}>
-                    <Typography color="text.secondary" variant='subtitle2'>
-                        Episódio {`${episode.episodeNum}`}
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle1" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden' align="left">
-                        {episode.title}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+        <>
+
+            <Card sx={{ display: 'flex', margin: 1, maxWidth: { xs: 1.0, sm: 300 }, maxHeight: { xs: 85, sm: 230 }, background: 'transparent' }} elevation={0}>
+                <CardActionArea component={Link} href={`/watch/${episode.episodeKey}`}>
+                    <Box sx={{ display: 'flex', flexDirection: {xs: 'row', sm: 'column'} }}>
+                        <CardMedia
+                            component="img"
+                            sx={{ width: { xs: 150, sm: 1.0 }, maxHeight: { xs: 1.0, sm: 170 } }}
+                            image={`${episode.episodeImg}`}
+                        />
+                        <CardContent sx={{ maxHeight: { xs: 1.0, sm: 60 }, padding: 1 }}>
+                            <Typography color="text.secondary" variant='subtitle2'>
+                                Episódio {`${episode.episodeNum}`}
+                            </Typography>
+                            <Typography gutterBottom variant="subtitle1" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden' align="left">
+                                {episode.title}
+                            </Typography>
+                        </CardContent>
+                    </Box>
+                </CardActionArea>
+            </Card>
+        </>
     );
 }
 
