@@ -1,7 +1,6 @@
-import { Box, CircularProgress, Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { Context } from "vm";
 import { Serie } from "../../src/@types/serie";
 import CardEpisode from "../../src/components/cards/CardEpisode";
@@ -38,59 +37,47 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
             return false
         } else { return true }
     }
-    const router = useRouter()
+    return (
+        <Box>
+            {
+                !isSerie() &&
+                <Container>
+                    <h3>Nenhum resultado encontrado</h3>
+                </Container>
+            }
+            {
+                isSerie() &&
+                <>
+                    <Head>
+                        <title>{`Assistir ${serie.title} Todos os Episódios Online`}</title>
+                        <meta name='description' content={serie.description} />
+                    </Head>
 
-    if (router.isFallback) {
-        return <>
-            <Container maxWidth='xs'>
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-                    <CircularProgress />
-                </Box>
-            </Container>
-        </>
-    }
-    else {
-        return (
-            <Box>
-                {
-                    !isSerie() &&
-                    <Container>
-                        <h3>Nenhum resultado encontrado</h3>
+                    <Container sx={{ pt: '35px' }}>
+
+                        <CardSerie serie={serie} />
+
+                        <Box display='flex'>
+                            <Grid
+                                container
+                                justifyContent="flex-start"
+                            >
+                                {
+                                    serie.seasons[0].episodes.map((episode, key) =>
+                                        <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
+                                            <CardEpisode key={key} episode={episode}></CardEpisode>
+                                        </Grid>
+                                    )
+                                }
+
+                            </Grid>
+                        </Box>
                     </Container>
-                }
-                {
-                    isSerie() &&
-                    <>
-                        <Head>
-                            <title>{`Assistir ${serie.title} Todos os Episódios Online`}</title>
-                            <meta name='description' content={serie.description} />
-                        </Head>
+                </>
+            }
+        </Box>
+    )
 
-                        <Container sx={{ pt: '35px' }}>
-
-                            <CardSerie serie={serie} />
-
-                            <Box display='flex'>
-                                <Grid
-                                    container
-                                    justifyContent="flex-start"
-                                >
-                                    {
-                                        serie.seasons[0].episodes.map((episode, key) =>
-                                            <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
-                                                <CardEpisode key={key} episode={episode}></CardEpisode>
-                                            </Grid>
-                                        )
-                                    }
-
-                                </Grid>
-                            </Box>
-                        </Container>
-                    </>
-                }
-            </Box>
-        )
-    }
 }
 
 export default Title

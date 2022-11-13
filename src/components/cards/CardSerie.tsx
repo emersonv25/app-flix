@@ -1,7 +1,5 @@
-import { Box, Card, CardContent, CardMedia, Chip, Container, Divider, Grid, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Chip, Grid, Typography } from "@mui/material";
 import { Serie } from "../../@types/serie";
-import CardEpisode from "./CardEpisode";
-
 
 type Props = {
     serie: Serie

@@ -21,14 +21,14 @@ const menus: Menu[] = [
 ]
 
 // latest, most views, most likes
-export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
+export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
     const [searchDisplay, setSearchDisplay] = useState(false);
     const [search, setSearch] = useState('');
     const appTheme = useAppTheme();
     const themeName = appTheme.themeName;
     const router = useRouter()
 
-    function goSearch (event: any){
+    function goSearch(event: any) {
         event.preventDefault();
         router.push('/search/' + search);
     }
@@ -42,9 +42,11 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                             <Toolbar>
                                 <MenuDrawer menus={menus} />
 
-                                <Typography variant='h6' m='auto' style={{ flexGrow: 0, justifyContent: 'start' }}>
-                                    {process.env.NEXT_PUBLIC_WEBSITE_TITLE}
-                                </Typography>
+
+                                    <Typography variant='h6' m='auto' style={{ flexGrow: 0, justifyContent: 'start', color: 'white', textDecoration: 'none'}} component={Link} href='/'>
+                                        {process.env.NEXT_PUBLIC_WEBSITE_TITLE}
+                                    </Typography>
+
 
                                 <Stack direction="row" style={{ flexGrow: 1, justifyContent: 'center' }} display={{ xs: 'none', md: 'flex' }}>
                                     {
@@ -59,10 +61,10 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                                         variant='standard'
                                         InputLabelProps={{ style: { padding: '0 15px', color: 'white' } }}
                                         InputProps={{ disableUnderline: true }}
-                                        style={{ backgroundColor: 'rgba(255,255,255,0.2)' ,borderRadius: 25, width: '100%', padding: '0  10px' }}
+                                        style={{ backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 25, width: '100%', padding: '0  10px' }}
                                         value={search}
-                                        onChange={(e) => setSearch(e.target.value)}                        
-                                        >
+                                        onChange={(e) => setSearch(e.target.value)}
+                                    >
                                     </TextField>
                                     <IconButton color='inherit' type="submit">
                                         <Icon>search</Icon>
@@ -77,7 +79,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                                         </IconButton>
                                     </Box>
                                 </Box>
-                                
+
                                 <Divider orientation="vertical" variant="middle" flexItem />
                                 <Box>
                                     <UserButton />
@@ -103,8 +105,8 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                             InputProps={{ disableUnderline: true }}
                             style={{ backgroundColor: themeName == 'dark' ? 'rgba(255,255,255,0.2)' : 'pink', borderRadius: 25, width: '100%', padding: '0  10px' }}
                             value={search}
-                            onChange={(e) => setSearch(e.target.value)}                  
-                            >
+                            onChange={(e) => setSearch(e.target.value)}
+                        >
 
                         </TextField>
                         <IconButton color='inherit' type="submit">

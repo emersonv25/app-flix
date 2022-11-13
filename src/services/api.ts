@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Serie } from "../@types/serie";
+import { Episode, Serie } from "../@types/serie";
 import https from 'https'
 
 const api = axios.create({
@@ -64,14 +64,22 @@ export async function getSerieByKey(key : string)
 export async function getSeriesByName(name : string)
 {
   let series : Serie[] = [];
-
-  series.map((episode) => {
-
-  } )
   try{
     const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series/search', {params: {name: name}})
     series = response.data
   }
   catch(err : any){ console.log('Err: getSeriesByName ' + name + ' : ' + err) }
   return series
+}
+
+
+export async function getEpisodeByKey(key : string)
+{
+  let episode : Episode = {} as any;
+  try{
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/episodes/' + key)
+    episode = response.data
+  }
+  catch(err : any){ console.log('Err: getEpisodeByKey: ' + key + ' : ' + err.response.data) }
+  return episode
 }
