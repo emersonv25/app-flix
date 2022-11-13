@@ -28,7 +28,8 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
     const themeName = appTheme.themeName;
     const router = useRouter()
 
-    function goSearch (){
+    function goSearch (event: any){
+        event.preventDefault();
         router.push('/search/' + search);
     }
 
@@ -51,7 +52,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                                     }
                                 </Stack>
 
-                                <Box display={{ xs: 'none', md: 'flex' }}>
+                                <Box display={{ xs: 'none', md: 'flex' }} component='form' onSubmit={goSearch}>
                                     <TextField
                                         size='small'
                                         label='Pesquisar...'
@@ -63,7 +64,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                                         onChange={(e) => setSearch(e.target.value)}                        
                                         >
                                     </TextField>
-                                    <IconButton color='inherit'  onClick={goSearch}>
+                                    <IconButton color='inherit' type="submit">
                                         <Icon>search</Icon>
                                     </IconButton>
                                 </Box>
@@ -93,7 +94,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
             {/* Input de pesquisar em telas pequenas */}
             <Box display={{ xs: 'flex', md: 'none' }} p={1}>
                 <Container>
-                    <Box display={{ xs: searchDisplay ? 'flex' : 'none', md: 'none' }} justifyContent='center' pb={1} pt={1}>
+                    <Box display={{ xs: searchDisplay ? 'flex' : 'none', md: 'none' }} justifyContent='center' pb={1} pt={1} component='form' onSubmit={goSearch}>
                         <TextField
                             size='small'
                             label='Pesquisar...'
@@ -106,7 +107,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children } : NavbarProps) => {
                             >
 
                         </TextField>
-                        <IconButton color='inherit' onClick={goSearch}>
+                        <IconButton color='inherit' type="submit">
                             <Icon>search</Icon>
                         </IconButton>
                         <IconButton color='inherit' onClick={() => setSearchDisplay(false)}>

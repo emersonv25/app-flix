@@ -9,6 +9,7 @@ import { NavBar } from '../src/components/navbar/NavBar';
 import { AuthProvider } from '../src/contexts/AuthContext';
 import { AlertProvider } from '../src/contexts/AlertContext';
 import Head from 'next/head';
+import NextNProgress from 'nextjs-progressbar';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -33,6 +34,7 @@ export default function MyApp(props: MyAppProps) {
               <CssBaseline />
               <NavBar>
                 <AlertPopup />
+                <NextNProgress />
                 <Component {...pageProps} />
               </NavBar>
             </AppThemeProvider>
