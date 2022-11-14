@@ -7,7 +7,7 @@ import PageCards from '../../src/components/cards/PageCards';
 import { Context } from "vm";
 
 // site.com/searc/one piece
-export const getStaticPaths: GetStaticPaths<{ name: string }> = async () => {
+export const getStaticPaths: GetStaticPaths<{ search: string }> = async () => {
     return {
         paths: [],
         fallback: true,
@@ -15,8 +15,8 @@ export const getStaticPaths: GetStaticPaths<{ name: string }> = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context: Context) => {
-    const name: string = context.params.name;
-    const series = await getSeriesByName(name) || []
+    const search: string = context.params.search;
+    const series = await getSeriesByName(search) || []
 
     return {
         props: {

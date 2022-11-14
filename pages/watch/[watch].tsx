@@ -8,15 +8,15 @@ import { getEpisodeByKey } from "../../src/services";
 
 
 // site.com/serie/one-piece
-export const getStaticPaths: GetStaticPaths<{ title: string }> = async () => {
+export const getStaticPaths: GetStaticPaths<{ watch: string }> = async () => {
     return {
-        paths: [{ params: { title: 'one-piece-episodio-1' } }],
+        paths: [{ params: { watch: 'one-piece-episodio-1' } }],
         fallback: true,
     };
 };
 
 export const getStaticProps: GetStaticProps = async (context: Context) => {
-    const key: string = context.params.title;
+    const key: string = context.params.watch;
     const episode = await getEpisodeByKey(key);
     return {
         props: {

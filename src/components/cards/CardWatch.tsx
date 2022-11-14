@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Container, Typography } from "@mui/material";
+import { Box, Card, CardContent, Container, Divider, Typography } from "@mui/material";
 import { Episode } from "../../@types/serie";
 import { CardMedia } from '@mui/material';
 
@@ -8,9 +8,9 @@ type Props = {
 export default function CardWatch({ episode }: Props) {
     return (
         <>
-            <Card sx={{ display: 'flex', background: 'transparent', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }} elevation={0}>
-                <Container>
-                    <Box sx={{ display: 'flex', width: 1.0, height: { xs: 250, sm: 400, md: 500, lg: 600 } }}>
+            <Card sx={{ display: 'flex', background: 'transparent', justifyContent: 'start' }} elevation={0}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: 1.0 }}>
+                    <Box sx={{ display: 'flex', height: { xs: 280, sm: 500, md: 600, lg: 700 } }}>
                         <iframe
                             width='100%'
                             height='100%'
@@ -29,8 +29,7 @@ export default function CardWatch({ episode }: Props) {
                             </Typography>
                         </CardContent>
                     </Box>
-                </Container>
-
+                </Box>
             </Card>
         </>
     );

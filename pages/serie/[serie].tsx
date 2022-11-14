@@ -1,6 +1,7 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, MenuItem, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import { useState } from "react";
 import { Context } from "vm";
 import { Serie } from "../../src/@types/serie";
 import CardEpisode from "../../src/components/cards/CardEpisode";
@@ -8,15 +9,15 @@ import CardSerie from "../../src/components/cards/CardSerie";
 import { getSerieByKey } from "../../src/services";
 
 // site.com/serie/one-piece
-export const getStaticPaths: GetStaticPaths<{ title: string }> = async () => {
+export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
     return {
-        paths: [{ params: { title: 'one-piece' } }],
+        paths: [{ params: { serie: 'one-piece' } }],
         fallback: true,
     };
 };
 
 export const getStaticProps: GetStaticProps = async (context: Context) => {
-    const key: string = context.params.title;
+    const key: string = context.params.serie;
     const serie = await getSerieByKey(key);
 
     return {
@@ -32,6 +33,8 @@ type Props = {
 }
 
 const Title: NextPage<Props> = ({ serie }: Props) => {
+    const [seasonNum, setSeasonNum] = useState(1)
+
     const isSerie = () => {
         if (JSON.stringify(serie) === "{}" || typeof serie === "undefined") {
             return false
@@ -53,17 +56,27 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                         <meta name='description' content={serie.description} />
                     </Head>
 
-                    <Container sx={{ pt: '35px' }}>
+                    <Container sx={{ pt: '35px', pb: '50px' }}>
 
                         <CardSerie serie={serie} />
 
+                        <Box pt={3} pb={5}>
+                            <Select value={seasonNum} onChange={(e) => setSeasonNum(Number(e.target.value))} sx={{width: 200}} disabled={serie.seasons.length <= 1}>
+                                {
+                                    serie.seasons.map((season, key) =>
+                                        <MenuItem value={season.seasonNum} key={key}> Temporada {season.seasonNum}</MenuItem>
+                                    )
+                                }
+
+                            </Select>
+                        </Box>
                         <Box display='flex'>
                             <Grid
                                 container
                                 justifyContent="flex-start"
                             >
                                 {
-                                    serie.seasons[0].episodes.map((episode, key) =>
+                                    serie.seasons[seasonNum - 1].episodes.map((episode, key) =>
                                         <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
                                             <CardEpisode key={key} episode={episode}></CardEpisode>
                                         </Grid>
