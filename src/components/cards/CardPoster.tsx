@@ -13,7 +13,7 @@ type Props = {
 const CardPoster = ({ serie }: Props) => {
     console
     return (
-        <Card sx={{ display: 'flex', margin: 1, maxWidth: 200, maxHeight: 340, borderRadius: 4, background: 'transparent' }} elevation={0}>
+        <Card sx={{ display: 'flex', margin: 1, maxWidth: 200, maxHeight: 340, borderRadius: 2, background: 'transparent' }} elevation={0}>
             <CardActionArea component={Link} href={`/serie/${serie.serieKey}`}>
                 <CardMedia
                     component="img"

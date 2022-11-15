@@ -39,12 +39,6 @@ const Watch: NextPage<Props> = ({ episode }: Props) => {
     return (
         <Box>
             {
-                !isEpisode() &&
-                <Container>
-                    <h3>Nenhum resultado encontrado</h3>
-                </Container>
-            }
-            {
                 isEpisode() &&
                 <>
                     <Head>
@@ -53,7 +47,6 @@ const Watch: NextPage<Props> = ({ episode }: Props) => {
                     </Head>
 
                     <CardWatch episode={episode} />
-
                 </>
             }
         </Box>

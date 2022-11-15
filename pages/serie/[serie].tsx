@@ -60,16 +60,22 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
 
                         <CardSerie serie={serie} />
 
-                        <Box pt={3} pb={5}>
-                            <Select value={seasonNum} onChange={(e) => setSeasonNum(Number(e.target.value))} sx={{width: 200}} disabled={serie.seasons.length <= 1}>
-                                {
-                                    serie.seasons.map((season, key) =>
-                                        <MenuItem value={season.seasonNum} key={key}> Temporada {season.seasonNum}</MenuItem>
-                                    )
-                                }
+                        <Box pt={3} pb={3} sx={{display: 'flex', flexDirection: 'row'}}>
+                            <Box>
+                                <h2>Episódios</h2>
+                            </Box>
+                            <Box sx={{marginLeft: 'auto'}}>
+                                <Select value={seasonNum} onChange={(e) => setSeasonNum(Number(e.target.value))} sx={{ width: 200 }} disabled={serie.seasons.length <= 1}>
+                                    {
+                                        serie.seasons.map((season, key) =>
+                                            <MenuItem value={season.seasonNum} key={key}> Temporada {season.seasonNum}</MenuItem>
+                                        )
+                                    }
 
-                            </Select>
+                                </Select>
+                            </Box>
                         </Box>
+
                         <Box display='flex'>
                             <Grid
                                 container
