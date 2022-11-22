@@ -21,10 +21,10 @@ export default function CardWatch({ episode }: Props) {
                     </Box>
 
                     <Box sx={{textAlign: 'center', background: 'black'}}>
-                        <ButtonGroup variant='text' color='inherit'>
-                            <IconButton title="Episódio Anterior" component={Link} href={`/watch/${episode.previousEpisodeKey}`} disabled={episode.previousEpisodeKey == null}><Icon fontSize="large">skip_previous</Icon></IconButton>
-                            <IconButton title='Todos os Episódios' component={Link} href={`/serie/${episode.serieKey}`}><Icon fontSize="large">list</Icon></IconButton>
-                            <IconButton title='Próximo Episódio' component={Link} href={`/watch/${episode.nextEpisodeKey}`} disabled={episode.nextEpisodeKey == null}><Icon fontSize="large">skip_next</Icon></IconButton>
+                        <ButtonGroup variant='text'>
+                            <IconButton sx={{color: 'white'}} title="Episódio Anterior" component={Link} href={`/watch/${episode.previousEpisodeKey}`} disabled={episode.previousEpisodeKey == null}><Icon fontSize="large">skip_previous</Icon></IconButton>
+                            <IconButton sx={{color: 'white'}} title='Todos os Episódios' component={Link} href={`/serie/${episode.serieKey}`}><Icon fontSize="large">list</Icon></IconButton>
+                            <IconButton sx={{color: 'white'}} title='Próximo Episódio' component={Link} href={`/watch/${episode.nextEpisodeKey}`} disabled={episode.nextEpisodeKey == null}><Icon fontSize="large">skip_next</Icon></IconButton>
                         </ButtonGroup>
                     </Box>
                     <Box>

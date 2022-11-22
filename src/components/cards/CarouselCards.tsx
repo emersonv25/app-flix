@@ -51,7 +51,7 @@ const swiperBreakPoints = {
     //sm
     600: {
         slidesPerView: 3,
-    },
+    }, //xs
     0: {
         slidesPerView: 2,
     }

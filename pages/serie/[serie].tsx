@@ -1,6 +1,7 @@
 import { Box, Container, Grid, MenuItem, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import { useState } from "react";
 import { Context } from "vm";
 import { Serie } from "../../src/@types/serie";
@@ -11,7 +12,7 @@ import { getSerieByKey } from "../../src/services";
 // site.com/serie/one-piece
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
     return {
-        paths: [{ params: { serie: 'one-piece' } }],
+        paths: [],
         fallback: true,
     };
 };
@@ -57,7 +58,6 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                     </Head>
 
                     <Container sx={{ pt: '35px', pb: '50px' }}>
-
                         <CardSerie serie={serie} />
 
                         <Box pt={3} pb={3} sx={{display: 'flex', flexDirection: 'row'}}>

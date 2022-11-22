@@ -68,14 +68,14 @@ export async function getSeriesByName(name : string)
     const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series/search', {params: {name: name}})
     series = response.data
   }
-  catch(err : any){ console.log('Err: getSeriesByName ' + name + ' : ' + err) }
+  catch(err){ console.log('Err: getSeriesByName ' + name + ' : ' + err) }
   return series
 }
 
 
 export async function getEpisodeByKey(key : string)
 {
-  let episode : Episode = {} as any;
+  let episode : Episode = {} as Episode;
   try{
     const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/episodes/' + key)
     episode = response.data

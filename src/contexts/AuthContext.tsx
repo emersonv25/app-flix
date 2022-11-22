@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../@types/user";
 import { useDebounce } from "../hooks/useDebounce";
 import { getProfile } from "../services/api";
