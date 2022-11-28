@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Episode, Serie } from "../@types/serie";
 import https from 'https'
+import { Result } from "../@types/result";
 
 const api = axios.create({
   httpsAgent: new https.Agent({  
@@ -38,16 +39,16 @@ export async function updateProfile(username: string, fullName: string, email: s
 
 // FLIX
 
-export async function getSeries()
+export async function getSeries(search? : string, currentPage: number = 1, pageSize: number = 15, sortOrder : string = "title" || "released_date" || "created_date" || "most_view" || null)
 {
-  let series : Serie[] = []
+  let result : Result = {} as Result
   try{
-    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series')
-    series = response.data
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series', {params: {search: search,currentPage: currentPage, pageSize: pageSize, sortOrder}})
+    result = response.data
   }
   catch(err : any){ console.log('Error ao consumir api getSeries ' + err.code) }
 
-  return series
+  return result
 }
 
 export async function getSerieByKey(key : string)
@@ -60,18 +61,6 @@ export async function getSerieByKey(key : string)
   catch(err : any){ console.log('Err: getSeriesByKey: ' + key + ' : ' + err.response.data) }
   return serie
 }
-
-export async function getSeriesByName(name : string)
-{
-  let series : Serie[] = [];
-  try{
-    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series/search', {params: {name: name}})
-    series = response.data
-  }
-  catch(err){ console.log('Err: getSeriesByName ' + name + ' : ' + err) }
-  return series
-}
-
 
 export async function getEpisodeByKey(key : string)
 {

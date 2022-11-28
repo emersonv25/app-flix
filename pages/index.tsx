@@ -1,19 +1,20 @@
 import * as React from 'react';
-import { Box, Button, Container, Typography } from "@mui/material";
-import { Serie } from '../src/@types/serie';
+import { Box, Button, CircularProgress, Container, Pagination, Typography } from "@mui/material";
 import CarouselCards from "../src/components/cards/CarouselCards";
 import PageCards from "../src/components/cards/PageCards";
 import { GetStaticProps, NextPage } from 'next';
 import { getSeries } from '../src/services/api';
 import Link from 'next/link';
+import { Result } from '../src/@types/result';
+import { useRouter } from 'next/router';
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const series: Serie[] = await getSeries()
+    const result: Result = await getSeries()
 
     return {
         props: {
-            series: series
+            result: result
         },
         revalidate: 10
     }
@@ -21,51 +22,64 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 type Props = {
-    series: Serie[]
+    result: Result
 }
 
-const Home: NextPage<Props> = ({ series }: Props) => {
-    return (
-        <>
-            <Box>
-                <Container maxWidth='xl'>
-                    <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-                        <Box>
-                            <h2>Melhores</h2>
-                        </Box>
-                        <Box sx={{ display: 'flex', pl: 1 }}>
-                            <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href=''>VER TODOS</Button>
-                        </Box>
-                    </Box>
-                    <Box>
-                        {
-                            series.length == 0 && <h3>Nenhum conteudo encontrado</h3>
-                        }
-                        {
-                            series && <CarouselCards arrayCards={series} ></CarouselCards>
-                        }
-
-                    </Box>
-                </Container>
-                <Container maxWidth='xl'>
-                    <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-                        <Box>
-                            <h2>Novos Episódios</h2>
-                        </Box>
-                        <Box sx={{ display: 'flex', pl: 1 }}>
-                            <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href=''>VER TODOS</Button>
-                        </Box>
-                    </Box>
-                    {
-                        series.length == 0 && <h3>Nenhum conteudo encontrado</h3>
-                    }
-                    {
-                        series && <PageCards arrayCards={series} ></PageCards>
-                    }
-                </Container>
+const Home: NextPage<Props> = ({ result }: Props) => {
+    const router = useRouter()
+    if (router.isFallback) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
+                <CircularProgress />
             </Box>
-        </>
-    )
+        )
+    }
+    else {
+        return (
+            <>
+                <Box>
+                    <Container maxWidth='xl'>
+                        <Box sx={{ flexDirection: 'row', display: 'flex' }}>
+                            <Box>
+                                <h2>Populares</h2>
+                            </Box>
+                            <Box sx={{ display: 'flex', pl: 1 }}>
+                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/browse?sort=most_view'>VER TODOS</Button>
+                            </Box>
+                        </Box>
+                        <Box>
+                            {
+                                result.totalResults == 0 && <h3>Nenhum conteudo encontrado</h3>
+                            }
+                            {
+                                result.results && <CarouselCards arrayCards={result.results} ></CarouselCards>
+                            }
+
+                        </Box>
+                    </Container>
+                    <Container maxWidth='xl'>
+                        <Box sx={{ flexDirection: 'row', display: 'flex' }}>
+                            <Box>
+                                <h2>Lançamentos</h2>
+                            </Box>
+                            <Box sx={{ display: 'flex', pl: 1 }}>
+                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/browse?sort=created_date'>VER TODOS</Button>
+                            </Box>
+                        </Box>
+                        {
+                            result.totalResults == 0 && <h3>Nenhum conteudo encontrado</h3>
+                        }
+                        {
+                            result.results &&
+                            <>
+                                <PageCards arrayCards={result.results} ></PageCards>
+                            </>
+                        }
+                    </Container>
+                </Box>
+            </>
+        )
+    }
 }
 
 export default Home

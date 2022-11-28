@@ -1,7 +1,8 @@
-import { Box, Container, Grid, MenuItem, Select } from "@mui/material";
+import { Box, CircularProgress, Container, Grid, MenuItem, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { Context } from "vm";
 import { Serie } from "../../src/@types/serie";
@@ -41,61 +42,72 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
             return false
         } else { return true }
     }
-    return (
-        <Box>
-            {
-                !isSerie() &&
-                <Container>
-                    <h3>Nenhum resultado encontrado</h3>
-                </Container>
-            }
-            {
-                isSerie() &&
-                <>
-                    <Head>
-                        <title>{`Assistir ${serie.title} Todos os Episódios Online`}</title>
-                        <meta name='description' content={serie.description} />
-                    </Head>
 
-                    <Container sx={{ pt: '35px', pb: '50px' }}>
-                        <CardSerie serie={serie} />
+    const router = useRouter()
+    if (router.isFallback) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
+                <CircularProgress />
+            </Box>
+        )
+    }
+    else {
+        return (
+            <Box>
+                {
+                    !isSerie() &&
+                    <Container>
+                        <h3>Série não encontrada</h3>
+                    </Container>
+                }
+                {
+                    isSerie() &&
+                    <>
+                        <Head>
+                            <title>{`Assistir ${serie.title} Todos os Episódios Online`}</title>
+                            <meta name='description' content={serie.description} />
+                        </Head>
 
-                        <Box pt={3} pb={3} sx={{display: 'flex', flexDirection: 'row'}}>
-                            <Box>
-                                <h2>Episódios</h2>
+                        <Container sx={{ pt: '35px', pb: '50px' }}>
+                            <CardSerie serie={serie} />
+
+                            <Box pt={3} pb={3} sx={{ display: 'flex', flexDirection: 'row' }}>
+                                <Box>
+                                    <h2>Episódios</h2>
+                                </Box>
+                                <Box sx={{ marginLeft: 'auto' }}>
+                                    <Select value={seasonNum} onChange={(e) => setSeasonNum(Number(e.target.value))} sx={{ width: 200 }} disabled={serie.seasons.length <= 1}>
+                                        {
+                                            serie.seasons.map((season, key) =>
+                                                <MenuItem value={season.seasonNum} key={key}> Temporada {season.seasonNum}</MenuItem>
+                                            )
+                                        }
+
+                                    </Select>
+                                </Box>
                             </Box>
-                            <Box sx={{marginLeft: 'auto'}}>
-                                <Select value={seasonNum} onChange={(e) => setSeasonNum(Number(e.target.value))} sx={{ width: 200 }} disabled={serie.seasons.length <= 1}>
+
+                            <Box display='flex'>
+                                <Grid
+                                    container
+                                    justifyContent="flex-start"
+                                >
                                     {
-                                        serie.seasons.map((season, key) =>
-                                            <MenuItem value={season.seasonNum} key={key}> Temporada {season.seasonNum}</MenuItem>
+                                        serie.seasons[seasonNum - 1].episodes.map((episode, key) =>
+                                            <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
+                                                <CardEpisode key={key} episode={episode}></CardEpisode>
+                                            </Grid>
                                         )
                                     }
 
-                                </Select>
+                                </Grid>
                             </Box>
-                        </Box>
-
-                        <Box display='flex'>
-                            <Grid
-                                container
-                                justifyContent="flex-start"
-                            >
-                                {
-                                    serie.seasons[seasonNum - 1].episodes.map((episode, key) =>
-                                        <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
-                                            <CardEpisode key={key} episode={episode}></CardEpisode>
-                                        </Grid>
-                                    )
-                                }
-
-                            </Grid>
-                        </Box>
-                    </Container>
-                </>
-            }
-        </Box>
-    )
+                        </Container>
+                    </>
+                }
+            </Box>
+        )
+    }
 
 }
 

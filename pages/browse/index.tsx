@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, CircularProgress, Container, Pagination } from "@mui/material";
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import PageCards from '../../src/components/cards/PageCards';
 import { Context } from "vm";
 import Head from 'next/head';
@@ -8,34 +8,32 @@ import { Result } from '../../src/@types/result';
 import { useRouter } from 'next/router';
 import { getSeries } from '../../src/services/api';
 
-// site.com/searc/one piece
-export const getStaticPaths: GetStaticPaths<{ search: string }> = async () => {
-    return {
-        paths: [],
-        fallback: true,
-    };
-};
 
-export const getStaticProps: GetStaticProps = async (context: Context) => {
-    const search: string = context.params.search;
-    const result: Result = await getSeries(search)
+export const getServerSideProps: GetServerSideProps = async (context: Context) => {
+    const sort: string = context.query.sort || 'most_view'
+    const page: number = context.query.page || '1'
+    const result: Result = await getSeries(undefined, page, 15, sort)
 
     return {
         props: {
-            result: result,
-            search: search
-        },
-        revalidate: 10
+            result: result
+        }
     }
 }
 
 type Props = {
     result: Result
-    search: string
 }
 
-const Search: NextPage<Props> = ({ result, search }: Props) => {
+const List: NextPage<Props> = ({ result }: Props) => {
     const router = useRouter()
+    function handlePage(event: any, value: any){
+        let query = router.query
+        query.page = value
+        router.replace({
+            query: query
+        })
+    }
     if (router.isFallback) {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
@@ -47,24 +45,24 @@ const Search: NextPage<Props> = ({ result, search }: Props) => {
         return (
             <>
                 <Head>
-                    <title>{`Você pesquisou por ${search} - ${process.env.NEXT_PUBLIC_WEBSITE_TITLE}`}</title>
+                    <title>{`Listona - ${process.env.NEXT_PUBLIC_WEBSITE_TITLE}`}</title>
                 </Head>
-                <Box>
-                    <Container maxWidth='xl'>
-                        <h2>Resultados para {search}</h2>
+                <Box sx={{pt:5}}>
+                    <Container maxWidth='lg'>
                         {
                             result.totalResults == 0 && <h3>Nenhum resultado encontrado</h3>
                         }
                         {
                             result.results && 
                             <>
+                                <h2>
+                                    Most Popular
+                                </h2>
                                 <PageCards arrayCards={result.results} ></PageCards>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
-                                    <Pagination count={result.totalPages} page={result.currentPage} />
+                                    <Pagination count={result.totalPages} page={result.currentPage} onChange={handlePage} />
                                 </Box>
                             </>
-                            
-
                         }
                     </Container>
                 </Box>
@@ -74,4 +72,4 @@ const Search: NextPage<Props> = ({ result, search }: Props) => {
 }
 
 
-export default Search
+export default List
