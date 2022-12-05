@@ -19,7 +19,7 @@ export interface Episode  {
     episodeNum: number,
     title?: string,
     description?: string,
-    episodeVideo?: string,
+    episodeVideo: string [],
     episodeImg? : string,
     seasonKey? : string, 
     serieKey?: string,

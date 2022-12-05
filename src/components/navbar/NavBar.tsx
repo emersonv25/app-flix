@@ -16,7 +16,7 @@ type NavbarProps = {
 const menus: Menu[] = [
     { name: 'Inicio', path: '/' },
     { name: 'Populares', path: '/browse?sort=most_view' },
-    { name: 'Lançamentos', path: '/browse?sort=created_date' },
+    { name: 'Lançamentos', path: '/browse?sort=latest_release' },
     { name: 'Ordem Alfabética', path: '/browse?sort=title' },
     { name: 'Sobre', path: '/about' },
 ]

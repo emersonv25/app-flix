@@ -10,11 +10,12 @@ import { useRouter } from 'next/router';
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const result: Result = await getSeries()
-
+    const resultLatestRelease: Result = await getSeries(undefined, 1, 15, 'latest_release');
+    const resultMostView: Result = await getSeries(undefined, 1, 15, 'most_view');
     return {
         props: {
-            result: result
+            resultLatestRelease: resultLatestRelease,
+            resultMostView: resultMostView
         },
         revalidate: 10
     }
@@ -22,10 +23,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 type Props = {
-    result: Result
+    resultLatestRelease: Result,
+    resultMostView: Result
 }
 
-const Home: NextPage<Props> = ({ result }: Props) => {
+const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease }: Props) => {
     const router = useRouter()
     if (router.isFallback) {
         return (
@@ -49,10 +51,10 @@ const Home: NextPage<Props> = ({ result }: Props) => {
                         </Box>
                         <Box>
                             {
-                                result.totalResults == 0 && <h3>Nenhum conteudo encontrado</h3>
+                                resultMostView.totalResults == 0 && <h3>Nenhum conteudo encontrado</h3>
                             }
                             {
-                                result.results && <CarouselCards arrayCards={result.results} ></CarouselCards>
+                                resultMostView.results && <CarouselCards arrayCards={resultMostView.results} ></CarouselCards>
                             }
 
                         </Box>
@@ -63,16 +65,16 @@ const Home: NextPage<Props> = ({ result }: Props) => {
                                 <h2>Lançamentos</h2>
                             </Box>
                             <Box sx={{ display: 'flex', pl: 1 }}>
-                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/browse?sort=created_date'>VER TODOS</Button>
+                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/browse?sort=latest_release'>VER TODOS</Button>
                             </Box>
                         </Box>
                         {
-                            result.totalResults == 0 && <h3>Nenhum conteudo encontrado</h3>
+                            resultLatestRelease.totalResults == 0 && <h3>Nenhum conteudo encontrado</h3>
                         }
                         {
-                            result.results &&
+                            resultLatestRelease.results &&
                             <>
-                                <PageCards arrayCards={result.results} ></PageCards>
+                                <PageCards arrayCards={resultLatestRelease.results} ></PageCards>
                             </>
                         }
                     </Container>

@@ -13,7 +13,7 @@ export default function PageCards({ arrayCards }: PageCardsProps) {
                 justifyContent="flex-start"
             >
                 {arrayCards.map((card, key) =>
-                    <Grid key={key} item xs={6} sm={4} md={3} lg={3} xl={2}>
+                    <Grid key={key} item xs={6} sm={4} md={3} lg={2} xl={2}>
                         <CardPoster key={key} serie={card}></CardPoster>
                     </Grid>
                 )}

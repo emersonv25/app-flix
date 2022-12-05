@@ -13,22 +13,29 @@ export const getServerSideProps: GetServerSideProps = async (context: Context) =
     const sort: string = context.query.sort || 'most_view'
     const page: number = context.query.page || '1'
     const result: Result = await getSeries(undefined, page, 15, sort)
-
+    const pageTitles = {
+        "most_view" : "Mais Populares",
+        "title" : "Ordem Alfabética",
+        "latest_release" : "Ultimos Lançamentos"
+    }
     return {
         props: {
-            result: result
+            result: result,
+            title: pageTitles[sort as keyof typeof pageTitles]
         }
     }
 }
 
 type Props = {
-    result: Result
+    result: Result,
+    title: string
 }
 
-const List: NextPage<Props> = ({ result }: Props) => {
+const List: NextPage<Props> = ({ result, title }: Props) => {
     const router = useRouter()
+    
     function handlePage(event: any, value: any){
-        let query = router.query
+        const query = router.query
         query.page = value
         router.replace({
             query: query
@@ -45,7 +52,7 @@ const List: NextPage<Props> = ({ result }: Props) => {
         return (
             <>
                 <Head>
-                    <title>{`Listona - ${process.env.NEXT_PUBLIC_WEBSITE_TITLE}`}</title>
+                    <title>{`${title} - ${process.env.NEXT_PUBLIC_WEBSITE_TITLE}`}</title>
                 </Head>
                 <Box sx={{pt:5}}>
                     <Container maxWidth='lg'>

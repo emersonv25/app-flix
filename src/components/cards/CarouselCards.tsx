@@ -42,7 +42,7 @@ const swiperBreakPoints = {
     },
     //lg
     1200: {
-        slidesPerView: 4,
+        slidesPerView: 6,
     },
     //md
     900: {
@@ -50,7 +50,7 @@ const swiperBreakPoints = {
     },
     //sm
     600: {
-        slidesPerView: 3,
+        slidesPerView: 4,
     }, //xs
     0: {
         slidesPerView: 2,
