@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, CircularProgress, Container, Pagination, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container } from "@mui/material";
 import CarouselCards from "../src/components/cards/CarouselCards";
 import PageCards from "../src/components/cards/PageCards";
 import { GetStaticProps, NextPage } from 'next';

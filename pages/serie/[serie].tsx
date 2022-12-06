@@ -1,7 +1,6 @@
 import { Box, CircularProgress, Container, Grid, MenuItem, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Context } from "vm";

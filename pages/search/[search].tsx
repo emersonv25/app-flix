@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, CircularProgress, Container, Pagination } from "@mui/material";
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import PageCards from '../../src/components/cards/PageCards';
 import { Context } from "vm";
 import Head from 'next/head';
@@ -8,24 +8,16 @@ import { Result } from '../../src/@types/result';
 import { useRouter } from 'next/router';
 import { getSeries } from '../../src/services/api';
 
-// site.com/searc/one piece
-export const getStaticPaths: GetStaticPaths<{ search: string }> = async () => {
-    return {
-        paths: [],
-        fallback: true,
-    };
-};
-
-export const getStaticProps: GetStaticProps = async (context: Context) => {
+export const getServerSideProps: GetServerSideProps = async (context: Context) => {
     const search: string = context.params.search;
-    const result: Result = await getSeries(search)
+    const page: number = context.query.page || '1'
+    const result: Result = await getSeries(search, page, 24, 'title')
 
     return {
         props: {
             result: result,
             search: search
-        },
-        revalidate: 10
+        }
     }
 }
 
@@ -36,6 +28,14 @@ type Props = {
 
 const Search: NextPage<Props> = ({ result, search }: Props) => {
     const router = useRouter()
+
+    function handlePage(event: any, value: any){
+        const query = router.query
+        query.page = value
+        router.replace({
+            query: query
+        })
+    }
     if (router.isFallback) {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
@@ -60,7 +60,7 @@ const Search: NextPage<Props> = ({ result, search }: Props) => {
                             <>
                                 <PageCards arrayCards={result.results} ></PageCards>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
-                                    <Pagination count={result.totalPages} page={result.currentPage} />
+                                    <Pagination count={result.totalPages} page={result.currentPage} onChange={handlePage} />
                                 </Box>
                             </>
                             

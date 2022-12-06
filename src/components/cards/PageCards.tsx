@@ -1,4 +1,4 @@
-import { Box, Grid, Pagination } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Serie } from "../../@types/serie";
 import CardPoster from "./CardPoster";
 

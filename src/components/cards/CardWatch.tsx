@@ -10,7 +10,7 @@ export default function CardWatch({ episode }: Props) {
     const [videoUrl, setVideoUrl] = useState(episode.episodeVideo[0])
 
     useEffect(() => {
-        setVideoUrl(episode.episodeVideo)
+        setVideoUrl(episode.episodeVideo[0])
     }, [episode])
     return (
         <>
