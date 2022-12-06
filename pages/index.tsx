@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const resultLatestRelease: Result = await getSeries(undefined, 1, 15, 'latest_release');
+    const resultLatestRelease: Result = await getSeries(undefined, 1, 24, 'latest_release');
     const resultMostView: Result = await getSeries(undefined, 1, 15, 'most_view');
     return {
         props: {

@@ -39,7 +39,7 @@ export async function updateProfile(username: string, fullName: string, email: s
 
 // FLIX
 
-export async function getSeries(search? : string, currentPage = 1, pageSize = 15, sortOrder? : string)
+export async function getSeries(search? : string, currentPage = 1, pageSize = 24, sortOrder? : string)
 {
   let result : Result = {} as Result
   try{

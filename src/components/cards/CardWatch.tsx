@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Card, CardContent, Icon, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Episode } from "../../@types/serie";
 
 type Props = {
@@ -9,6 +9,9 @@ type Props = {
 export default function CardWatch({ episode }: Props) {
     const [videoUrl, setVideoUrl] = useState(episode.episodeVideo[0])
 
+    useEffect(() => {
+        setVideoUrl(episode.episodeVideo)
+    }, [episode])
     return (
         <>
             <Card sx={{ display: 'flex', background: 'transparent', justifyContent: 'start' }} elevation={0}>

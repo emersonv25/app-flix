@@ -12,7 +12,7 @@ import { getSeries } from '../../src/services/api';
 export const getServerSideProps: GetServerSideProps = async (context: Context) => {
     const sort: string = context.query.sort || 'most_view'
     const page: number = context.query.page || '1'
-    const result: Result = await getSeries(undefined, page, 15, sort)
+    const result: Result = await getSeries(undefined, page, 24, sort)
     const pageTitles = {
         "most_view" : "Mais Populares",
         "title" : "Ordem Alfabética",
@@ -63,7 +63,7 @@ const List: NextPage<Props> = ({ result, title }: Props) => {
                             result.results && 
                             <>
                                 <h2>
-                                    Most Popular
+                                    {title}
                                 </h2>
                                 <PageCards arrayCards={result.results} ></PageCards>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
