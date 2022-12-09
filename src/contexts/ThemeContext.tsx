@@ -3,6 +3,7 @@ import { ThemeProvider } from '@emotion/react'
 import { DarkTheme } from '../themes'
 import { LightTheme } from '../themes/Light';
 import { Box } from '@mui/material';
+import { ProviderProps } from '../@types/ProviderProps';
 
 interface IThemeContextData {
     themeName: 'light' | 'dark'
@@ -10,15 +11,11 @@ interface IThemeContextData {
 }
 export const ThemeContext = createContext({} as IThemeContextData);
 
-interface IAppThemeProviderProps {
-    children: React.ReactNode
-}
-
 export const useAppThemeContext = () => {
     return useContext(ThemeContext);
 }
 
-export const AppThemeProvider: React.FC<IAppThemeProviderProps> = ({ children } : IAppThemeProviderProps ) => {
+export const AppThemeProvider: React.FC<ProviderProps> = ({ children } : ProviderProps ) => {
     const [themeName, setThemeName] = useState<'light' | 'dark'>('dark');
 
     useEffect(() => {

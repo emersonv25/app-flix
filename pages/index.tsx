@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Box, Button, CircularProgress, Container } from "@mui/material";
 import CarouselCards from "../src/components/cards/CarouselCards";
 import PageCards from "../src/components/cards/PageCards";
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 import { getSeries } from '../src/services/api';
 import Link from 'next/link';
 import { Result } from '../src/@types/result';
 import { useRouter } from 'next/router';
+import { useFavorite } from '../src/hooks/useFavorite';
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -21,13 +22,16 @@ export const getStaticProps: GetStaticProps = async () => {
     }
 }
 
-
 type Props = {
     resultLatestRelease: Result,
-    resultMostView: Result
+    resultMostView: Result,
 }
 
 const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease }: Props) => {
+    const {favoritesKey, favoritesSerie, getFavoritesSeries} = useFavorite();
+    React.useEffect(() => {
+        getFavoritesSeries()
+    },[favoritesKey])
     const router = useRouter()
     if (router.isFallback) {
         return (
@@ -40,6 +44,25 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease }: Props) =
         return (
             <>
                 <Box>
+                <Container maxWidth='xl'>
+                        <Box sx={{ flexDirection: 'row', display: 'flex' }}>
+                            <Box>
+                                <h2>Seus Favoritos</h2>
+                            </Box>
+                            <Box sx={{ display: 'flex', pl: 1 }}>
+                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/browse?sort=most_view'>VER TODOS</Button>
+                            </Box>
+                        </Box>
+                        <Box>
+                            {
+                                favoritesSerie?.totalResults == 0 && <h3>Nenhum conteudo encontrado</h3>
+                            }
+                            {
+                                favoritesSerie?.results && <CarouselCards arrayCards={favoritesSerie.results} ></CarouselCards>
+                            }
+
+                        </Box>
+                    </Container>
                     <Container maxWidth='xl'>
                         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
                             <Box>

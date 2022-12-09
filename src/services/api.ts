@@ -39,11 +39,11 @@ export async function updateProfile(username: string, fullName: string, email: s
 
 // FLIX
 
-export async function getSeries(search? : string, currentPage = 1, pageSize = 24, sortOrder? : string)
+export async function getSeries(search? : string, currentPage = 1, pageSize = 24, sortOrder? : string, keys? : string)
 {
   let result : Result = {} as Result
   try{
-    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series', {params: {search: search,currentPage: currentPage, pageSize: pageSize, sortOrder}})
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series', {params: {search: search,currentPage: currentPage, pageSize: pageSize, sortOrder, keys : keys}})
     result = response.data
   }
   catch(err : any){ console.log('Error ao consumir api getSeries ' + err.code) }

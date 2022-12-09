@@ -1,11 +1,9 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { ProviderProps } from "../@types/ProviderProps";
 import { User } from "../@types/user";
 import { useDebounce } from "../hooks/useDebounce";
 import { getProfile } from "../services/api";
-interface IAuthProviderProps {
-    children: React.ReactNode
-}
 
 interface AuthContextType {
     signed: boolean;
@@ -22,7 +20,7 @@ export const useAuthContext = () => {
     return useContext(AuthContext);
 }
 
-export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }: IAuthProviderProps) => {
+export const AuthProvider: React.FC<ProviderProps> = ({ children }: ProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState('');
     const {debounce} = useDebounce();

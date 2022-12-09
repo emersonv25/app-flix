@@ -10,6 +10,7 @@ import { AuthProvider } from '../src/contexts/AuthContext';
 import { AlertProvider } from '../src/contexts/AlertContext';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
+import { FavoriteProvider } from '../src/contexts/FavoriteContext';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -31,12 +32,14 @@ export default function MyApp(props: MyAppProps) {
         <AlertProvider>
           <AuthProvider>
             <AppThemeProvider>
-              <CssBaseline />
-              <NavBar>
-                <AlertPopup />
-                <NextNProgress />
-                <Component {...pageProps} />
-              </NavBar>
+              <FavoriteProvider>
+                <CssBaseline />
+                <NavBar>
+                  <AlertPopup />
+                  <NextNProgress />
+                  <Component {...pageProps} />
+                </NavBar>
+              </FavoriteProvider>
             </AppThemeProvider>
           </AuthProvider>
         </AlertProvider>
