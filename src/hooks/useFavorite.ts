@@ -4,10 +4,10 @@ import { FavoriteContext } from '../contexts/FavoriteContext'
 import { getSeries } from '../services/api'
 
 export const useFavorite = () =>{
-	const { favoritesKey, favoritesSerie, setfavoritesSerie,setFavoritesKey} = useContext(FavoriteContext)
+	const { favoritesKey, favoritesResult, setfavoritesResult,setFavoritesKey} = useContext(FavoriteContext)
 	
 	const toggleFavorite = (serieKey: string) =>{	
-        const newFavorites : string[] = favoritesKey
+        const newFavorites : string[] = JSON.parse(localStorage.getItem('favorites') || '[]')
         const index = newFavorites.indexOf(serieKey);
         if(index > -1)
         {
@@ -20,11 +20,14 @@ export const useFavorite = () =>{
         setFavoritesKey([...newFavorites])
 		localStorage.setItem('favorites', JSON.stringify([...newFavorites]))
 	}
-    async function getFavoritesSeries ()
+    async function getfavoritesResult (currentPage: number = 1, pageSize: number = 15, sort = 'title')
     {
-        const resultFavorites: Result = await getSeries(undefined, 1, 15, 'title', favoritesKey.join(';'))
-        setfavoritesSerie(resultFavorites)
+        if(favoritesKey.length > 0)
+        {
+            const resultFavorites: Result = await getSeries(undefined, currentPage, pageSize, sort, favoritesKey.join(';'))
+            setfavoritesResult(resultFavorites)
+        }
     }
 
-	return { favoritesKey, favoritesSerie,toggleFavorite, getFavoritesSeries}
+	return { favoritesKey, favoritesResult,toggleFavorite, getfavoritesResult}
 }

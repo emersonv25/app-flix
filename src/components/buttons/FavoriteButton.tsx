@@ -9,7 +9,7 @@ type Props = {
 }
 
 export function FavoriteButton({ serieKey, onlyIcon = false }: Props) {
-    const {favoritesKey, toggleFavorite, getFavoritesSeries} = useFavorite();
+    const {favoritesKey, toggleFavorite} = useFavorite();
 
     const [isFavorite, setFavorite] = useState(checkFavorite(serieKey));
 
