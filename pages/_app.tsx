@@ -32,7 +32,7 @@ export default function MyApp(props: MyAppProps) {
         <AlertProvider>
           <AuthProvider>
             <AppThemeProvider>
-              <FavoriteProvider>
+              <FavoriteProvider> 
                 <CssBaseline />
                 <NavBar>
                   <AlertPopup />
