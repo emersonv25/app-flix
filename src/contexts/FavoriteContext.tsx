@@ -18,7 +18,7 @@ export const FavoriteProvider = ({ children }: ProviderProps) => {
     const [favoritesResult, setfavoritesResult] = useState<Result | null>(null)
 
     useEffect(() => {
-        const localFavorite = JSON.parse(localStorage.getItem('favorites') || 'null')
+        const localFavorite = JSON.parse(localStorage.getItem('favorites') || '[]')
         if(localFavorite.length != null)
         {
             setFavoritesKey(localFavorite)
