@@ -33,7 +33,7 @@ export default function CardSerie({ serie }: Props) {
                                             <Chip key={key} label={name} size="small" sx={{ m: 0.5 }} />
                                         )}
                                     </Grid>
-                                    <Typography variant="subtitle1" color="text.secondary" component="div" mt={2} >
+                                    <Typography variant="subtitle1" color="text.secondary" component="div" mt={2} sx={{whiteSpace: "pre-line"}}>
                                         {serie.description}
                                     </Typography>
                                 </Box>
