@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Chip, Grid, Typography } from "@mui/material";
 import { Serie } from "../../@types/serie";
 import { FavoriteButton } from "../buttons/FavoriteButton";
+import Image from 'next/image';
 
 type Props = {
     serie: Serie
@@ -13,10 +14,11 @@ export default function CardSerie({ serie }: Props) {
                     <Box sx={{ display: 'flex', pl: 1, pr: 1, flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'center', md: 'start' } }}>
                         <Box sx={{display: 'flex', flexDirection: 'column'}}>
                             <CardMedia
-                                component="img"
                                 sx={{ width: 220, height: 330 }}
-                                image={serie.posterImg}
-                            />
+                            >
+                                <Image src={`${serie.posterImg}`} width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={serie.title || ''} />
+
+                            </CardMedia>
                             <FavoriteButton serieKey={serie.serieKey || ''} onlyIcon={false}/>
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>

@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Box, CardActionArea } from '@mui/material';
 import { Episode } from '../../@types/serie';
 import Link from 'next/link';
+import Image from 'next/image'
 
 type Props = {
     episode: Episode
@@ -16,12 +17,12 @@ const CardEpisode = ({ episode }: Props) => {
 
             <Card sx={{ display: 'flex', margin: 1, maxWidth: { xs: 1.0, sm: 300 }, maxHeight: { xs: 85, sm: 230 }, background: 'transparent' }} elevation={0}>
                 <CardActionArea component={Link} href={`/watch/${episode.episodeKey}`}>
-                    <Box sx={{ display: 'flex', flexDirection: {xs: 'row', sm: 'column'} }}>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'row', sm: 'column' } }}>
                         <CardMedia
-                            component="img"
                             sx={{ width: { xs: 150, sm: 1.0 }, maxHeight: { xs: 1.0, sm: 170 } }}
-                            image={`${episode.episodeImg}`}
-                        />
+                        >
+                            <Image src={`${episode.episodeImg}`}  width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={episode.description || ''} />
+                        </CardMedia>
                         <CardContent sx={{ maxHeight: { xs: 1.0, sm: 60 }, padding: 1 }}>
                             <Typography color="text.secondary" variant='subtitle2'>
                                 Episódio {`${episode.episodeNum}`}
