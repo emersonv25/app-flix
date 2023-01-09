@@ -4,6 +4,7 @@ export interface Serie {
     description?: string,
     posterImg?: string,
     releasedDate?: string,
+    rating?: string
     categories?: string[],
     seasons : Season[],
 }
@@ -19,10 +20,16 @@ export interface Episode  {
     episodeNum: number,
     title?: string,
     description?: string,
-    episodeVideo: string [],
+    episodeVideos: EpisodeVideos [],
     episodeImg? : string,
     seasonKey? : string, 
     serieKey?: string,
     previousEpisodeKey?: string,
-    nextEpisodeKey?: string
+    nextEpisodeKey?: string,
+    releasedDate?: string
+}
+export interface EpisodeVideos {
+    optionName?: string,
+    videoUrl: string,
+    isIframe: boolean
 }

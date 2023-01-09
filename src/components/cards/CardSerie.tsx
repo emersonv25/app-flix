@@ -1,7 +1,8 @@
-import { Box, Card, CardContent, CardMedia, Chip, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Chip, Grid, Icon, IconButton, Typography } from "@mui/material";
 import { Serie } from "../../@types/serie";
 import { FavoriteButton } from "../buttons/FavoriteButton";
 import Image from 'next/image';
+
 
 type Props = {
     serie: Serie
@@ -12,14 +13,17 @@ export default function CardSerie({ serie }: Props) {
             <Card sx={{ display: 'flex', borderRadius: 3, background: 'transparent' }} elevation={0}>
                 <Box sx={{ display: 'flex', pt: 3 }}>
                     <Box sx={{ display: 'flex', pl: 1, pr: 1, flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'center', md: 'start' } }}>
-                        <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <CardMedia
                                 sx={{ width: 220, height: 330 }}
                             >
                                 <Image src={`${serie.posterImg}`} width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={serie.title || ''} />
 
                             </CardMedia>
-                            <FavoriteButton serieKey={serie.serieKey || ''} onlyIcon={false}/>
+                            <IconButton color='info' size="small">
+                                <Icon fontSize="medium">star</Icon> {serie.rating}
+                            </IconButton>
+                            <FavoriteButton serieKey={serie.serieKey || ''} onlyIcon={false} />
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <CardContent sx={{ flex: '1 0 auto' }}>
@@ -35,7 +39,7 @@ export default function CardSerie({ serie }: Props) {
                                             <Chip key={key} label={name} size="small" sx={{ m: 0.5 }} />
                                         )}
                                     </Grid>
-                                    <Typography variant="subtitle1" color="text.secondary" component="div" mt={2} sx={{whiteSpace: "pre-line"}}>
+                                    <Typography variant="subtitle1" color="text.secondary" component="div" mt={2} sx={{ whiteSpace: "pre-line" }}>
                                         {serie.description}
                                     </Typography>
                                 </Box>

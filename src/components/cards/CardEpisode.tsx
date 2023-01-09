@@ -12,6 +12,7 @@ type Props = {
 }
 
 const CardEpisode = ({ episode }: Props) => {
+    console.log(episode)
     return (
         <>
 
@@ -25,7 +26,7 @@ const CardEpisode = ({ episode }: Props) => {
                         </CardMedia>
                         <CardContent sx={{ maxHeight: { xs: 1.0, sm: 60 }, padding: 1 }}>
                             <Typography color="text.secondary" variant='subtitle2'>
-                                Episódio {`${episode.episodeNum}`}
+                                Episódio {`${episode.episodeNum}`} | {episode.releasedDate}
                             </Typography>
                             <Typography gutterBottom variant="subtitle1" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden' align="left">
                                 {episode.title}
