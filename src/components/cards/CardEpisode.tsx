@@ -12,7 +12,6 @@ type Props = {
 }
 
 const CardEpisode = ({ episode }: Props) => {
-    console.log(episode)
     return (
         <>
 
