@@ -19,10 +19,20 @@ const CardEpisode = ({ episode }: Props) => {
                 <CardActionArea component={Link} href={`/watch/${episode.episodeKey}`}>
                     <Box sx={{ display: 'flex', flexDirection: { xs: 'row', sm: 'column' } }}>
                         <CardMedia
+                            component="img"
                             sx={{ width: { xs: 150, sm: 1.0 }, maxHeight: { xs: 1.0, sm: 170 } }}
-                        >
-                            <Image src={`${episode.episodeImg}`}  width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={episode.description || ''} />
-                        </CardMedia>
+                            image={`${episode.episodeImg}`}
+                        />
+                        {
+                            /*
+                                <CardMedia
+                                    sx={{ width: { xs: 150, sm: 1.0 }, maxHeight: { xs: 1.0, sm: 170 } }}
+                                >
+                                    <Image src={`${episode.episodeImg}`} width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={episode.description || ''} />
+                                </CardMedia>
+                            */
+                        }
+
                         <CardContent sx={{ maxHeight: { xs: 1.0, sm: 60 }, padding: 1 }}>
                             <Typography color="text.secondary" variant='subtitle2'>
                                 Episódio {`${episode.episodeNum}`} | {episode.releasedDate}
