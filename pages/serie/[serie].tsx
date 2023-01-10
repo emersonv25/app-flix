@@ -101,7 +101,7 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                                 </Box>
                             </Box>
                             {
-                                episodesPaged &&
+                                (episodesPaged && episodesPaged.length > 1) &&
                                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                     <Pagination count={episodesPaged.length} page={currentPage} onChange={handleCurrentPage} />
                                 </Box>
@@ -123,7 +123,7 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                                 </Grid>
                             </Box>
                             {
-                                episodesPaged &&
+                                (episodesPaged && episodesPaged.length > 1) &&
                                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                     <Pagination count={episodesPaged.length} page={currentPage} onChange={handleCurrentPage} />
                                 </Box>
