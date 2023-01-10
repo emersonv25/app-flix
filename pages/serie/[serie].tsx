@@ -1,13 +1,14 @@
-import { Box, CircularProgress, Container, Grid, MenuItem, Select } from "@mui/material";
+import { Box, CircularProgress, Container, Grid, MenuItem, Pagination, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Context } from "vm";
-import { Serie } from "../../src/@types/serie";
+import { Episode, Serie } from "../../src/@types/serie";
 import CardEpisode from "../../src/components/cards/CardEpisode";
 import CardSerie from "../../src/components/cards/CardSerie";
 import { getSerieByKey } from "../../src/services";
+import { array_chunk, array_chunk_episode } from "../../src/utils/utils";
 
 // site.com/serie/one-piece
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
@@ -35,6 +36,20 @@ type Props = {
 
 const Title: NextPage<Props> = ({ serie }: Props) => {
     const [seasonNum, setSeasonNum] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [episodesPaged, setEpisodesPaged] = useState<Episode[][] | null>(null)
+
+    const handleCurrentPage = (event: React.ChangeEvent<unknown>, value: number) => {
+        setCurrentPage(value);
+    };
+
+    useEffect(() => {
+        setCurrentPage(1)
+        if(serie)
+        {
+            setEpisodesPaged(array_chunk_episode(serie.seasons[seasonNum - 1].episodes, 100))
+        }
+    }, [seasonNum, serie])
 
     const isSerie = () => {
         if (JSON.stringify(serie) === "{}" || typeof serie === "undefined") {
@@ -85,14 +100,20 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                                     </Select>
                                 </Box>
                             </Box>
-
+                            {
+                                episodesPaged &&
+                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Pagination count={episodesPaged.length} page={currentPage} onChange={handleCurrentPage} />
+                                </Box>
+                            }
                             <Box display='flex'>
                                 <Grid
                                     container
                                     justifyContent="flex-start"
                                 >
                                     {
-                                        serie.seasons[seasonNum - 1].episodes.map((episode, key) =>
+                                        episodesPaged && 
+                                        episodesPaged[currentPage - 1].map((episode, key) =>
                                             <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
                                                 <CardEpisode key={key} episode={episode}></CardEpisode>
                                             </Grid>
@@ -101,6 +122,13 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
 
                                 </Grid>
                             </Box>
+                            {
+                                episodesPaged &&
+                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Pagination count={episodesPaged.length} page={currentPage} onChange={handleCurrentPage} />
+                                </Box>
+                            }
+
                         </Container>
                     </>
                 }
