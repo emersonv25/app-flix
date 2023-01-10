@@ -2,13 +2,13 @@ import { Box, CircularProgress, Container, Grid, MenuItem, Pagination, Select } 
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Context } from "vm";
 import { Episode, Serie } from "../../src/@types/serie";
 import CardEpisode from "../../src/components/cards/CardEpisode";
 import CardSerie from "../../src/components/cards/CardSerie";
 import { getSerieByKey } from "../../src/services";
-import { array_chunk, array_chunk_episode } from "../../src/utils/utils";
+import { array_chunk_episode } from "../../src/utils/utils";
 
 // site.com/serie/one-piece
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {

@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup, Card, CardContent, Icon, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Episode, EpisodeVideos } from "../../@types/serie";
+import { Episode } from "../../@types/serie";
 
 type Props = {
     episode: Episode
