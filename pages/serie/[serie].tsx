@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container, Grid, MenuItem, Pagination, Select } from "@mui/material";
+import { Box, CircularProgress, Container, FormControl, Grid, InputLabel, MenuItem, Pagination, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { Episode, Serie } from "../../src/@types/serie";
 import CardEpisode from "../../src/components/cards/CardEpisode";
 import CardSerie from "../../src/components/cards/CardSerie";
 import { getSerieByKey } from "../../src/services";
-import { array_chunk_episode } from "../../src/utils/utils";
+import { array_chunk_episode, dynamicSort } from "../../src/utils/utils";
 
 // site.com/serie/one-piece
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
@@ -38,6 +38,8 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
     const [seasonNum, setSeasonNum] = useState(1)
     const [currentPage, setCurrentPage] = useState(1)
     const [episodesPaged, setEpisodesPaged] = useState<Episode[][] | null>(null)
+    const [perPage, setPerPage] = useState(100)
+    const [order, setOrder] = useState('episodeNum')
 
     const handleCurrentPage = (event: React.ChangeEvent<unknown>, value: number) => {
         setCurrentPage(value);
@@ -45,11 +47,11 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
 
     useEffect(() => {
         setCurrentPage(1)
-        if(serie)
-        {
-            setEpisodesPaged(array_chunk_episode(serie.seasons[seasonNum - 1].episodes, 100))
+        if (serie) {
+            setEpisodesPaged(array_chunk_episode(serie.seasons[seasonNum - 1].episodes, perPage))
+            console.log(episodesPaged)
         }
-    }, [seasonNum, serie])
+    }, [seasonNum, perPage, order, serie])
 
     const isSerie = () => {
         if (JSON.stringify(serie) === "{}" || typeof serie === "undefined") {
@@ -100,20 +102,39 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                                     </Select>
                                 </Box>
                             </Box>
-                            {
-                                (episodesPaged && episodesPaged.length > 1) &&
-                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }} >
+                                <FormControl size="small" sx={{  minWidth: 120 }}>
+                                    <InputLabel>Exibir por página</InputLabel>
+                                    <Select value={perPage} onChange={(e) => setPerPage(Number(e.target.value))} size="small">
+                                        <MenuItem value="25">25</MenuItem>
+                                        <MenuItem value="50">50</MenuItem>
+                                        <MenuItem value="100">100</MenuItem>
+                                        <MenuItem value="9999999999">Todos</MenuItem>
+                                    </Select>
+                                </FormControl>
+
+                                {
+                                    (episodesPaged && episodesPaged.length > 1) &&
                                     <Pagination count={episodesPaged.length} page={currentPage} onChange={handleCurrentPage} />
-                                </Box>
-                            }
+
+                                }
+                                <FormControl size="small" sx={{ minWidth: 120 }}>
+                                    <InputLabel>Ordenar</InputLabel>
+                                    <Select value={order} onChange={(e) => setOrder(String(e.target.value))} size="small">
+                                        <MenuItem value="episodeNum">Crescente</MenuItem>
+                                        <MenuItem value="-episodeNum">Decrescente</MenuItem>
+                                    </Select>
+                                </FormControl>
+
+                            </Box>
                             <Box display='flex'>
                                 <Grid
                                     container
                                     justifyContent="flex-start"
                                 >
                                     {
-                                        episodesPaged && 
-                                        episodesPaged[currentPage - 1].map((episode, key) =>
+                                        episodesPaged &&
+                                        episodesPaged[currentPage - 1].sort(dynamicSort(order)).map((episode, key) =>
                                             <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
                                                 <CardEpisode key={key} episode={episode}></CardEpisode>
                                             </Grid>
