@@ -7,6 +7,7 @@ import { Context } from "vm";
 import { Episode, Serie } from "../../src/@types/serie";
 import CardEpisode from "../../src/components/cards/CardEpisode";
 import CardSerie from "../../src/components/cards/CardSerie";
+import GridCardEpisode from "../../src/components/cards/GridCardEpisode";
 import { getSerieByKey } from "../../src/services";
 import { array_chunk_episode, dynamicSort } from "../../src/utils/utils";
 
@@ -102,9 +103,9 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                                 </Box>
                             </Box>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }} >
-                                <FormControl size="small" sx={{  minWidth: 120 }}>
-                                    <InputLabel>Exibir por página</InputLabel>
-                                    <Select value={perPage} onChange={(e) => setPerPage(Number(e.target.value))} size="small">
+                                <FormControl size="small" sx={{ minWidth: 80 }}>
+                                    <InputLabel>Exibir</InputLabel>
+                                    <Select value={perPage} label="Exibir" onChange={(e) => setPerPage(Number(e.target.value))} >
                                         <MenuItem value="25">25</MenuItem>
                                         <MenuItem value="50">50</MenuItem>
                                         <MenuItem value="100">100</MenuItem>
@@ -119,7 +120,7 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                                 }
                                 <FormControl size="small" sx={{ minWidth: 120 }}>
                                     <InputLabel>Ordenar</InputLabel>
-                                    <Select value={order} onChange={(e) => setOrder(String(e.target.value))} size="small">
+                                    <Select value={order} onChange={(e) => setOrder(String(e.target.value))} label="Ordenar">
                                         <MenuItem value="episodeNum">Crescente</MenuItem>
                                         <MenuItem value="-episodeNum">Decrescente</MenuItem>
                                     </Select>
@@ -127,20 +128,10 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
 
                             </Box>
                             <Box display='flex'>
-                                <Grid
-                                    container
-                                    justifyContent="flex-start"
-                                >
-                                    {
-                                        episodesPaged &&
-                                        episodesPaged[currentPage - 1].sort(dynamicSort(order)).map((episode, key) =>
-                                            <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
-                                                <CardEpisode key={key} episode={episode}></CardEpisode>
-                                            </Grid>
-                                        )
-                                    }
-
-                                </Grid>
+                                {
+                                    episodesPaged &&
+                                    <GridCardEpisode arrayCards={episodesPaged[currentPage - 1].sort(dynamicSort(order))}></GridCardEpisode>
+                                }
                             </Box>
                             {
                                 (episodesPaged && episodesPaged.length > 1) &&
