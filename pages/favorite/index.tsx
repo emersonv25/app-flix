@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, CircularProgress, Container, Pagination } from "@mui/material";
 import { NextPage } from 'next';
-import PageCards from '../../src/components/cards/PageCards';
+import GridCardPoster from '../../src/components/cards/GridCardPoster';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useFavorite } from '../../src/hooks/useFavorite';
@@ -51,7 +51,7 @@ const Favorite: NextPage = () => {
                         {
                             favoritesResult?.results &&
                             <>
-                                <PageCards arrayCards={favoritesResult.results} ></PageCards>
+                                <GridCardPoster arrayCards={favoritesResult.results} ></GridCardPoster>
                                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                     <Pagination count={favoritesResult.totalPages} page={favoritesResult.currentPage} onChange={handlePage} />
                                 </Box>

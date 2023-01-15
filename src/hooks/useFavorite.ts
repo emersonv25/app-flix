@@ -20,11 +20,11 @@ export const useFavorite = () =>{
         setFavoritesKey([...newFavorites])
 		localStorage.setItem('favorites', JSON.stringify([...newFavorites]))
 	}
-    async function getfavoritesResult (currentPage: number = 1, pageSize: number = 15, sort = 'title')
+    async function getfavoritesResult (currentPage: number = 1, pageSize: number = 15, order = 'title')
     {
         if(favoritesKey.length > 0)
         {
-            const resultFavorites: Result = await getSeries(undefined, currentPage, pageSize, sort, favoritesKey.join(';'))
+            const resultFavorites: Result = await getSeries(undefined, currentPage, pageSize, order, "asc", favoritesKey.join(';'))
             setfavoritesResult(resultFavorites)
         }
     }

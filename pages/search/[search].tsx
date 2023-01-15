@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, CircularProgress, Container, Pagination } from "@mui/material";
 import { GetServerSideProps, NextPage } from 'next';
-import PageCards from '../../src/components/cards/PageCards';
+import GridCardPoster from '../../src/components/cards/GridCardPoster';
 import { Context } from "vm";
 import Head from 'next/head';
 import { Result } from '../../src/@types/result';
@@ -58,7 +58,7 @@ const Search: NextPage<Props> = ({ result, search }: Props) => {
                         {
                             result.results && 
                             <>
-                                <PageCards arrayCards={result.results} ></PageCards>
+                                <GridCardPoster arrayCards={result.results} ></GridCardPoster>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
                                     <Pagination count={result.totalPages} page={result.currentPage} onChange={handlePage} />
                                 </Box>

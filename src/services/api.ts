@@ -39,14 +39,14 @@ export async function updateProfile(username: string, fullName: string, email: s
 
 // FLIX
 
-export async function getSeries(search? : string, currentPage = 1, pageSize = 24, sortOrder? : string, keys? : string)
+export async function getSeries(search? : string, currentPage = 1, pageSize = 24, orderBy? : string, sortOrder? : string, keys? : string)
 {
   let result : Result = {} as Result
   try{
-    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series', {params: {search: search,currentPage: currentPage, pageSize: pageSize, sortOrder, keys : keys}})
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series', {params: {search: search,currentPage: currentPage, pageSize: pageSize, orderBy: orderBy, sortOrder: sortOrder, keys : keys}})
     result = response.data
   }
-  catch(err : any){ console.log('Error ao consumir api getSeries ' + err.code) }
+  catch(err : any){ console.error('Error ao consumir api getSeries ' + err.code) }
 
   return result
 }
@@ -58,7 +58,7 @@ export async function getSerieByKey(key : string)
     const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series/' + key)
     serie = response.data
   }
-  catch(err : any){ console.log('Err: getSeriesByKey: ' + key + ' : ' + err.response.data) }
+  catch(err : any){ console.error('Err: getSeriesByKey: ' + key + ' : ' + err.response.data) }
   return serie
 }
 
@@ -69,6 +69,17 @@ export async function getEpisodeByKey(key : string)
     const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/episodes/' + key)
     episode = response.data
   }
-  catch(err : any){ console.log('Err: getEpisodeByKey: ' + key + ' : ' + err.response.data) }
+  catch(err : any){ console.error('Err: getEpisodeByKey: ' + key + ' : ' + err.response.data) }
   return episode
+}
+export async function getLastEpisodes(currentPage = 1, pageSize = 24)
+{
+  let result : Result = {} as Result
+  try{
+    const response = await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/episodes/last', {params: {currentPage: currentPage, pageSize: pageSize}})
+    result = response.data
+  }
+  catch(err : any){ console.error('Error ao consumir api getLastEpisodes ' + err.code) }
+
+  return result
 }

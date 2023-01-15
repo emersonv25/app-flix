@@ -49,7 +49,6 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
         setCurrentPage(1)
         if (serie) {
             setEpisodesPaged(array_chunk_episode(serie.seasons[seasonNum - 1].episodes, perPage))
-            console.log(episodesPaged)
         }
     }, [seasonNum, perPage, order, serie])
 

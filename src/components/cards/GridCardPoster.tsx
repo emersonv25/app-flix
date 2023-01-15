@@ -2,10 +2,10 @@ import { Grid } from "@mui/material";
 import { Serie } from "../../@types/serie";
 import CardPoster from "./CardPoster";
 
-type PageCardsProps = {
+type GridCardPosterProps = {
     arrayCards: Serie[]
 }
-export default function PageCards({ arrayCards }: PageCardsProps) {
+export default function GridCardPoster({ arrayCards }: GridCardPosterProps) {
     return (
         <>
             <Grid
