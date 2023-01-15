@@ -49,7 +49,7 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
             <>
                 <Box>
                     {
-                        favoritesResult !== null && <Container maxWidth='xl'>
+                        favoritesResult !== null && (JSON.stringify(favoritesResult) !== '{}') && <Container maxWidth='xl'>
                             <Box sx={{ flexDirection: 'row', display: 'flex' }}>
                                 <Box>
                                     <h2>Meus Favoritos</h2>
