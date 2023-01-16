@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Container } from "@mui/material";
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import { Context } from "vm";
@@ -7,6 +7,12 @@ import { Episode } from "../../src/@types/serie";
 import CardWatch from "../../src/components/cards/CardWatch";
 import { getEpisodeByKey } from "../../src/services";
 
+export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
+    return {
+        paths: [],
+        fallback: true,
+    };
+};
 export const getStaticProps: GetStaticProps = async (context: Context) => {
     const key: string = context.params.watch;
     const episode = await getEpisodeByKey(key);
@@ -14,7 +20,7 @@ export const getStaticProps: GetStaticProps = async (context: Context) => {
         props: {
             episode: episode
         },
-        revalidate: 60*60
+        revalidate: 1000
     }
 }
 
