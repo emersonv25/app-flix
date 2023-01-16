@@ -17,7 +17,6 @@ const Favorite: NextPage = () => {
 
     React.useEffect(() => {
         getfavoritesResult(currentPage as number, 24, sort)
-        console.log(favoritesResult)
     }, [favoritesKey])
 
     const title = "Seus Favoritos"
@@ -47,7 +46,7 @@ const Favorite: NextPage = () => {
                         <h2>Meus Favoritos</h2>
 
                         {
-                            favoritesResult === null || (JSON.stringify(favoritesResult) === '{}') && <h3>Você não possui nada adicionado aos seus favoritos</h3>
+                            favoritesResult === null && <h3>Você não possui nenhum favorito adicionado</h3>
                         }
                         {
                             favoritesResult?.results &&

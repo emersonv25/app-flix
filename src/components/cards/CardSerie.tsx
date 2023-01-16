@@ -1,7 +1,6 @@
 import { Box, Card, CardContent, CardMedia, Chip, Grid, Icon, IconButton, Typography } from "@mui/material";
 import { Serie } from "../../@types/serie";
 import { FavoriteButton } from "../buttons/FavoriteButton";
-import Image from 'next/image';
 
 
 type Props = {
@@ -14,12 +13,25 @@ export default function CardSerie({ serie }: Props) {
                 <Box sx={{ display: 'flex', pt: 3 }}>
                     <Box sx={{ display: 'flex', pl: 1, pr: 1, flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'center', md: 'start' } }}>
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                            {
+                                /*
+                                
+                                    <CardMedia
+                                        sx={{ width: 220, height: 330 }}
+                                    >
+                                        <Image src={`${serie.posterImg}`} width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={serie.title || ''} />
+
+                                    </CardMedia>
+                                */
+                            }
                             <CardMedia
                                 sx={{ width: 220, height: 330 }}
-                            >
-                                <Image src={`${serie.posterImg}`} width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={serie.title || ''} />
-
+                                image={`${serie.posterImg}`}
+                                component="img"
+                                alt={'imagem do anime' + serie.title || ''}
+                                >
                             </CardMedia>
+
                             <IconButton color='info' size="small">
                                 <Icon fontSize="medium">star</Icon> {serie.rating}
                             </IconButton>

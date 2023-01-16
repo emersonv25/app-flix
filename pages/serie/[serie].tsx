@@ -1,17 +1,15 @@
-import { Box, CircularProgress, Container, FormControl, Grid, InputLabel, MenuItem, Pagination, Select } from "@mui/material";
+import { Box, CircularProgress, Container, FormControl, InputLabel, MenuItem, Pagination, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Context } from "vm";
 import { Episode, Serie } from "../../src/@types/serie";
-import CardEpisode from "../../src/components/cards/CardEpisode";
 import CardSerie from "../../src/components/cards/CardSerie";
 import GridCardEpisode from "../../src/components/cards/GridCardEpisode";
 import { getSerieByKey } from "../../src/services";
 import { array_chunk_episode, dynamicSort } from "../../src/utils/utils";
 
-// site.com/serie/one-piece
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
     return {
         paths: [],
@@ -27,7 +25,7 @@ export const getStaticProps: GetStaticProps = async (context: Context) => {
         props: {
             serie: serie
         },
-        revalidate: 60
+        revalidate: 120
     }
 }
 
