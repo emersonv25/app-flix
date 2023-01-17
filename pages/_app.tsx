@@ -8,7 +8,6 @@ import AlertPopup from '../src/components/alerts/AlertPopup';
 import { NavBar } from '../src/components/navbar/NavBar';
 import { AuthProvider } from '../src/contexts/AuthContext';
 import { AlertProvider } from '../src/contexts/AlertContext';
-import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
 import { FavoriteProvider } from '../src/contexts/FavoriteContext';
 import ReactGA from "react-ga4";
@@ -28,10 +27,6 @@ export default function MyApp(props: MyAppProps) {
   }
   return (
     <>
-      <Head>
-        <title>{`${process.env.NEXT_PUBLIC_WEBSITE_TITLE} - ${process.env.NEXT_PUBLIC_WEBSITE_SUBTITLE}`}</title>
-        <meta name='description' content={process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION} />
-      </Head>
       <CacheProvider value={emotionCache}>
         <AlertProvider>
           <AuthProvider>

@@ -6,7 +6,7 @@ import createEmotionCache from '../src/utils/createEmotionCache';
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="pt-BR">
         <Head>
           {/* PWA primary color */}
           <link rel="shortcut icon" href="/favicon.ico" />
@@ -20,6 +20,8 @@ export default class MyDocument extends Document {
           />
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
+          <title>{`${process.env.NEXT_PUBLIC_WEBSITE_TITLE} - ${process.env.NEXT_PUBLIC_WEBSITE_SUBTITLE}`}</title>
+          <meta name='description' content={process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION} />
         </Head>
         <body>
           <Main />
