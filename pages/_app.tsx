@@ -11,6 +11,7 @@ import { AlertProvider } from '../src/contexts/AlertContext';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
 import { FavoriteProvider } from '../src/contexts/FavoriteContext';
+import ReactGA from "react-ga4";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -21,7 +22,10 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+  if(process.env.NEXT_PUBLIC_GOOGLE_GA4_ID)
+  {
+    ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_GA4_ID);
+  }
   return (
     <>
       <Head>

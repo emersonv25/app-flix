@@ -7,10 +7,13 @@ type Props = {
     episode: Episode
 }
 export default function CardWatch({ episode }: Props) {
-    const [videoUrl, setVideoUrl] = useState(episode.episodeVideos[0].videoUrl)
+    const [videoUrl, setVideoUrl] = useState('')
 
     useEffect(() => {
-        setVideoUrl(episode.episodeVideos[0].videoUrl)
+        if(typeof episode.episodeVideos !== 'undefined')
+        {
+            setVideoUrl(episode.episodeVideos[0].videoUrl)
+        }
     }, [episode])
     return (
         <>
@@ -28,7 +31,7 @@ export default function CardWatch({ episode }: Props) {
 
                     <Box sx={{ textAlign: 'center', background: 'black' }}>
                         <ButtonGroup variant='text'>
-                            {episode.episodeVideos.map((episodeVideo, index) => <Button sx={{margin: 1}} variant="contained" size="small" color='primary' onClick={() => setVideoUrl(episodeVideo.videoUrl)} key={index}> {episodeVideo.optionName ? episodeVideo.optionName : 'Player ' + index+1}</Button>)}
+                            {episode.episodeVideos&& episode.episodeVideos.map((episodeVideo, index) => <Button sx={{margin: 1}} variant="contained" size="small" color='primary' onClick={() => setVideoUrl(episodeVideo.videoUrl)} key={index}> {episodeVideo.optionName ? episodeVideo.optionName : 'Player ' + index+1}</Button>)}
                             <IconButton sx={{ color: 'white' }} title="Episódio Anterior" component={Link} href={`/watch/${episode.previousEpisodeKey}`} disabled={episode.previousEpisodeKey == null}><Icon fontSize="large">skip_previous</Icon></IconButton>
                             <IconButton sx={{ color: 'white' }} title='Todos os Episódios' component={Link} href={`/serie/${episode.serieKey}`}><Icon fontSize="large">list</Icon></IconButton>
                             <IconButton sx={{ color: 'white' }} title='Próximo Episódio' component={Link} href={`/watch/${episode.nextEpisodeKey}`} disabled={episode.nextEpisodeKey == null}><Icon fontSize="large">skip_next</Icon></IconButton>
