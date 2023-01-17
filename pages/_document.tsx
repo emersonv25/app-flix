@@ -20,7 +20,6 @@ export default class MyDocument extends Document {
           />
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
-          <title>{`${process.env.NEXT_PUBLIC_WEBSITE_TITLE} - ${process.env.NEXT_PUBLIC_WEBSITE_SUBTITLE}`}</title>
           <meta name='description' content={process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION} />
         </Head>
         <body>
