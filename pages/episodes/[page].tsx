@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, CircularProgress, Container, Pagination } from "@mui/material";
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { Context } from "vm";
 import Head from 'next/head';
 import { Result } from '../../src/@types/result';
@@ -8,15 +8,21 @@ import { useRouter } from 'next/router';
 import { getLastEpisodes } from '../../src/services/api';
 import GridCardEpisode from '../../src/components/cards/GridCardEpisode';
 
-
-export const getServerSideProps: GetServerSideProps = async (context: Context) => {
-    const page: number = context.query.page || '1'
+export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
+    return {
+        paths: [],
+        fallback: true,
+    };
+};
+export const getStaticProps: GetStaticProps = async (context: Context) => {
+    const page: number = context.params.page;
     const result: Result = await getLastEpisodes(page, 24)
     return {
         props: {
             result: result,
             title: "Ultimos Episódios Lançados"
-        }
+        },
+        revalidate: 120
     }
 }
 
@@ -29,10 +35,8 @@ const EpisodesPage: NextPage<Props> = ({ result, title }: Props) => {
     const router = useRouter()
 
     function handlePage(event: any, value: any) {
-        const query = router.query
-        query.page = value
-        router.replace({
-            query: query
+        router.push({
+            pathname: '/episodes/' + value
         })
     }
     if (router.isFallback) {
