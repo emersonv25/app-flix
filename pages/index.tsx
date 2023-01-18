@@ -111,7 +111,7 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
                                 <h2>Novos Episódios</h2>
                             </Box>
                             <Box sx={{ display: 'flex', pl: 1 }}>
-                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/episodes'>VER TODOS</Button>
+                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/episodes/1'>VER TODOS</Button>
                             </Box>
                         </Box>
                         {

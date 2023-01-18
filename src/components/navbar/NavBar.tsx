@@ -18,7 +18,7 @@ const menus: Menu[] = [
     { name: 'Favoritos', path: '/favorite' },
     { name: 'Populares', path: '/browse?order=most_view&sort=desc' },
     { name: 'Lançamentos', path: '/browse?order=created_date&sort=desc' },
-    { name: "Episódios", path: '/episodes'},
+    { name: "Episódios", path: '/episodes/1'},
     { name: 'Ordem Alfabética', path: '/browse?order=title&sort=asc' },
     { name: 'Sobre', path: '/about' },
 ]

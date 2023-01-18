@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Serie } from '../../@types/serie';
 import Link from 'next/link';
+import Image from 'next/image'
 
 type Props = {
     serie: Serie
@@ -18,19 +19,20 @@ const CardPoster = ({ serie }: Props) => {
 
                 {
                     /*
-                         <CardMedia
-                            sx={{ width: 1.0, maxHeight: 300 }}
-                        >
-                            <Image src={`${serie.posterImg}`} width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={serie.title || ''} />
-                        </CardMedia>
-                    */
-                }
                 <CardMedia
                     component="img"
                     sx={{ width: 1.0, maxHeight: 300 }}
                     image={`${serie.posterImg}`}
                     alt={'imagem do anime' + serie.title || ''}
                 ></CardMedia>
+                    */
+                }
+                <CardMedia
+                    sx={{ width: 1.0, maxHeight: 300 }}
+                >
+                    <Image src={`${serie.posterImg}`} width="0" height="0" sizes="100vw" style={{ width: '100%', height: 'auto' }} alt={serie.title || ''} />
+                </CardMedia>
+
 
                 <CardContent sx={{ height: 50, padding: 1 }}>
                     <Typography gutterBottom variant="subtitle1" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden' align="left">
