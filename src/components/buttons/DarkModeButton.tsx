@@ -1,5 +1,4 @@
 import { Icon, IconButton } from "@mui/material";
-import Head from "next/head";
 import useAppTheme from "../../hooks/useAppTheme";
 
 
