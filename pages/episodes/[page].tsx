@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, CircularProgress, Container, Pagination } from "@mui/material";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import {GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { Context } from "vm";
 import Head from 'next/head';
 import { Result } from '../../src/@types/result';
