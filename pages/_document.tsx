@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
       <Html lang="pt-BR">
         <Head>
           {/* PWA primary color */}
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="shortcut icon" href="/favicon.png" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
