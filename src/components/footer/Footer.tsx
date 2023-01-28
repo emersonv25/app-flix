@@ -15,13 +15,13 @@ export const Footer: FC = (): ReactElement => {
                 <Container maxWidth="lg">
                     <Grid container direction="column" alignItems="center">
                         <Grid item xs={12}>
-                            <Typography variant="h6" color='white' >
+                            <Typography variant="h6" color='white' textAlign='center'>
                                 {` ${process.env.NEXT_PUBLIC_WEBSITE_DOMAIN?.toUpperCase()} © ${new Date().getFullYear()}`}
 
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography color="white" variant="subtitle2">
+                            <Typography color="white" variant="subtitle2" textAlign='center'>
                                 {` ${process.env.NEXT_PUBLIC_WEBSITE_FOOTER_SUBTITLE1}`} <Link href='/privacity-policy' style={{ color: 'white' }}>Política de Privacidade</Link> - <Link href='/dmca' style={{ color: 'white' }}> DMCA</Link>
                             </Typography>
                             
