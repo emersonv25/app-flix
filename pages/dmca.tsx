@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container } from "@mui/material"
 import { NextPage } from "next";
 import Link from "next/link";
 
@@ -8,17 +8,17 @@ const DMCA: NextPage = () => {
         <Container>
             <h1>Legal Disclaimer </h1>
             <div>
-                The author is not responsible for any contents linked or referred to from his pages - If any damage occurs by the use of information presented there, only the author of the respective pages might be liable, not the one who has linked to these pages. {domain} doesn't host any content.
+                The author is not responsible for any contents linked or referred to from his pages - If any damage occurs by the use of information presented there, only the author of the respective pages might be liable, not the one who has linked to these pages. {` ${domain}`} doesn't host any content.
                 <br /><br />
-                All {domain} does is link or embed content that was uploaded to popular Online Video hosting sites like Youtube.com / Google Video. All youtube/googlevideo users signed a contract with the sites when they set up their accounts which forces them not to upload illegal content. By clicking on any Links to videos while surfing on {domain} you watch content hosted on third parties and {domain} can't take the responsibility for any content hosted on other sites.
+                All {` ${domain}`} does is link or embed content that was uploaded to popular Online Video hosting sites like Youtube.com / Google Video. All youtube/googlevideo users signed a contract with the sites when they set up their accounts which forces them not to upload illegal content. By clicking on any Links to videos while surfing on {` ${domain}`} you watch content hosted on third parties and {` ${domain}`} can't take the responsibility for any content hosted on other sites.
                 <br /><br />
                 We do not upload any videos nor do we know who and where videos are coming from. We do not promote any illegal conduct of any kind. Links to the videos are submitted by users and managed by users.
             </div>
             <h1>DMCA Notice of Copyright Infringement</h1>
             <div>
-                {domain} is an online service provider as defined in the Digital Millennium Copyright Act.
+                {` ${domain}`} is an online service provider as defined in the Digital Millennium Copyright Act.
                 <br /><br />
-                We take copyright violation very seriously and will vigorously protect the rights of legal copyright owners. If you are the copyright owner of content which appears on the {domain} website and you did not authorize the use of the content you must notify us in writing in order for us to identify the allegedly infringing content and take action.
+                We take copyright violation very seriously and will vigorously protect the rights of legal copyright owners. If you are the copyright owner of content which appears on the {` ${domain}`} website and you did not authorize the use of the content you must notify us in writing in order for us to identify the allegedly infringing content and take action.
                 <br /><br />
                 We will be unable to take any action if you do not provide us with the required information, so please fill out all fields accurately and completely. You may make a written notice via the contact form as listed below. Your written notice must include the following:
                 <br /><br />

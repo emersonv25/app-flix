@@ -1,5 +1,5 @@
 
-import { AppBar, Box, Button, Container, Divider, Icon, IconButton, Paper, TextField, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Container, Divider, Icon, IconButton, TextField, Toolbar, Typography } from '@mui/material'
 import { Stack } from '@mui/system';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Menu } from '../../@types/menu';
 import useAppTheme from '../../hooks/useAppTheme';
 import { DarkModeButton } from '../buttons/DarkModeButton';
-import UserButton from '../buttons/UserButton';
+//import UserButton from '../buttons/UserButton';
 import { MenuDrawer } from './MenuDrawer';
 
 type NavbarProps = {

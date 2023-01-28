@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { pink, purple, red } from "@mui/material/colors";
+import { purple, red } from "@mui/material/colors";
 
 
 export const LightTheme = createTheme({
