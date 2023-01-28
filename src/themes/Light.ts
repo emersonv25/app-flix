@@ -1,14 +1,14 @@
 import { createTheme } from "@mui/material";
-import { pink, purple } from "@mui/material/colors";
+import { pink, purple, red } from "@mui/material/colors";
 
 
 export const LightTheme = createTheme({
     palette: {
         mode: 'light',
         primary:{
-          main: pink['A200'],
-          dark: pink[500],
-          light: pink['A100'],
+          main: "#ED1C24",
+          dark: red[800],
+          light: red[400],
           contrastText: 'white',
         },
         secondary: {

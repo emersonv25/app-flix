@@ -32,8 +32,8 @@ export function FavoriteButton({ serieKey, onlyIcon = false }: Props) {
     }
     else {
         return (
-            <Button onClick={() => toggleFavorite(serieKey)} variant="outlined" sx={{ mt: 1 }} color='primary' startIcon={isFavorite ? <Favorite /> : <FavoriteBorder />}>
-                {isFavorite ? <>REMOVE</> : <>ADD</>} FAVORITO
+            <Button onClick={() => toggleFavorite(serieKey)} variant="contained" sx={{ mt: 1 }} color='primary' startIcon={isFavorite ? <Favorite /> : <FavoriteBorder />}>
+                FAVORITO
             </Button>
         )
     }

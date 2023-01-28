@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, CircularProgress, Container } from "@mui/material";
+import { Box, Button, CircularProgress, Container, Typography } from "@mui/material";
 import CarouselCards from "../src/components/cards/CarouselCards";
 import { GetStaticProps, NextPage } from 'next';
 import { getLastEpisodes, getSeries } from '../src/services/api';
@@ -46,16 +46,16 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
     }
     else {
         return (
-            <>
+            <Container maxWidth='xl' sx={{ pt: '15px' }}>
                 <Box>
                     {
-                        favoritesResult !== null && (JSON.stringify(favoritesResult) !== '{}') && <Container maxWidth='xl'>
+                        favoritesResult !== null && (JSON.stringify(favoritesResult) !== '{}') && <>
                             <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-                                <Box>
-                                    <h2>Meus Favoritos</h2>
+                                <Box sx={{ p: '10px' }}>
+                                    <Typography variant="h5" component={Link} href='/favorite' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold' }} color='inherit'>Meus Favoritos</Typography>
                                 </Box>
-                                <Box sx={{ display: 'flex', pl: 1 }}>
-                                    <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/favorite'>VER TODOS</Button>
+                                <Box sx={{ alignSelf: 'center', borderRadius: '9px' }}>
+                                    <Button color='primary' size='small' component={Link} href='/favorite'>VER TODOS</Button>
                                 </Box>
                             </Box>
                             <Box>
@@ -64,16 +64,16 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
                                 }
 
                             </Box>
-                        </Container>
+                        </>
 
                     }
-                    <Container maxWidth='xl'>
+                    <>
                         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-                            <Box>
-                                <h2>Populares</h2>
+                            <Box sx={{ p: '10px' }}>
+                                <Typography variant="h5" component={Link} href='/browse?order=most_view&sort=desc' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold'}} color='inherit'>Populares</Typography>
                             </Box>
-                            <Box sx={{ display: 'flex', pl: 1 }}>
-                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/browse?order=most_view&sort=desc'>VER TODOS</Button>
+                            <Box sx={{ display: 'flex' }}>
+                                <Button sx={{ alignSelf: 'center', borderRadius: '9px' }} color='primary' size='small' component={Link} href='/browse?order=most_view&sort=desc'>VER TODOS</Button>
                             </Box>
                         </Box>
                         <Box>
@@ -85,14 +85,14 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
                             }
 
                         </Box>
-                    </Container>
-                    <Container maxWidth='xl'>
+                    </>
+                    <>
                         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-                            <Box>
-                                <h2>Lançamentos</h2>
+                            <Box sx={{ p: '10px' }}>
+                                <Typography variant="h5" component={Link} href='/browse?order=created_date&sort=desc' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold' }} color='inherit'>Lançamentos</Typography>
                             </Box>
-                            <Box sx={{ display: 'flex', pl: 1 }}>
-                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/browse?order=created_date&sort=desc'>VER TODOS</Button>
+                            <Box sx={{ display: 'flex' }}>
+                                <Button sx={{ alignSelf: 'center', borderRadius: '9px' }} color='primary' size='small' component={Link} href='/browse?order=created_date&sort=desc'>VER TODOS</Button>
                             </Box>
                         </Box>
                         {
@@ -104,14 +104,14 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
                                 <CarouselCards arrayCards={resultLatestRelease.results} ></CarouselCards>
                             </>
                         }
-                    </Container>
-                    <Container maxWidth='xl'>
+                    </>
+                    <>
                         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-                            <Box>
-                                <h2>Novos Episódios</h2>
+                            <Box sx={{ p: '10px' }}>
+                                <Typography variant="h5" component={Link} href='/episodes/1' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold' }} color='inherit'>Novos Episódios</Typography>
                             </Box>
-                            <Box sx={{ display: 'flex', pl: 1 }}>
-                                <Button sx={{ alignSelf: 'center' }} color='warning' size='small' component={Link} href='/episodes/1'>VER TODOS</Button>
+                            <Box sx={{ display: 'flex' }}>
+                                <Button sx={{ alignSelf: 'center', borderRadius: '9px' }} color='primary' size='small' component={Link} href='/episodes/1'>VER TODOS</Button>
                             </Box>
                         </Box>
                         {
@@ -125,9 +125,9 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
                                 </Box>
                             </>
                         }
-                    </Container>
+                    </>
                 </Box>
-            </>
+            </Container>
         )
     }
 }

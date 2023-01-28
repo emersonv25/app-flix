@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container, FormControl, InputLabel, MenuItem, Pagination, Select } from "@mui/material";
+import { Box, CircularProgress, Container, FormControl, InputLabel, MenuItem, Pagination, Paper, Select } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -82,7 +82,7 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
                             <meta name='description' content={serie.description} />
                         </Head>
 
-                        <Container sx={{ pt: '35px', pb: '50px' }}>
+                        <Container sx={{ mt: '15px', mb: '15px', borderRadius:'10px' }} component={Paper}>
                             <CardSerie serie={serie} />
 
                             <Box pt={3} pb={3} sx={{ display: 'flex', flexDirection: 'row' }}>

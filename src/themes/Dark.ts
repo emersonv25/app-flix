@@ -1,14 +1,14 @@
 import { createTheme } from "@mui/material";
-import { pink, purple, grey } from "@mui/material/colors";
+import { pink, purple, grey, red } from "@mui/material/colors";
 
 
 export const DarkTheme = createTheme({
    palette: {
       mode: 'dark',
       primary: {
-         main: pink['A400'],
-         dark: pink[800],
-         light: pink[300],
+         main: "#ED1C24",
+         dark: red[800],
+         light: red[400],
          contrastText: '#FFFFFF',
       },
       secondary: {
@@ -18,10 +18,9 @@ export const DarkTheme = createTheme({
          contrastText: '#FFFFFF',
       },
       background: {
-         paper: '#1F2331',
-         default: '#090C13'
-      }
-      
+         paper: '#000000',
+         default: '#212121'
+      },   
    },
    components: {
       MuiTextField:{

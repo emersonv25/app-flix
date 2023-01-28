@@ -12,7 +12,7 @@ import NextNProgress from 'nextjs-progressbar';
 import { FavoriteProvider } from '../src/contexts/FavoriteContext';
 import ReactGA from "react-ga4";
 import Head from 'next/head';
-
+import './_app.css'
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 

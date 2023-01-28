@@ -1,5 +1,5 @@
 
-import { AppBar, Box, Button, Container, Divider, Icon, IconButton, TextField, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Container, Divider, Icon, IconButton, Paper, TextField, Toolbar, Typography } from '@mui/material'
 import { Stack } from '@mui/system';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -18,7 +18,7 @@ const menus: Menu[] = [
     { name: 'Favoritos', path: '/favorite' },
     { name: 'Populares', path: '/browse?order=most_view&sort=desc' },
     { name: 'Lançamentos', path: '/browse?order=created_date&sort=desc' },
-    { name: "Episódios", path: '/episodes/1'},
+    { name: "Episódios", path: '/episodes/1' },
     { name: 'Ordem Alfabética', path: '/browse?order=title&sort=asc' },
     { name: 'Sobre', path: '/about' },
 ]
@@ -40,60 +40,66 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
         <>
             <Box width="100%">
                 <AppBar position='static'>
-                    <Container maxWidth='xl'>
-                        <Box>
-                            <Toolbar>
-                                <MenuDrawer menus={menus} />
+                    <Box style={{backgroundColor: 'black'}}>
+                        <Container maxWidth='xl'>
+                            <Box>
+                                <Toolbar>
+                                    <MenuDrawer menus={menus} />
 
-
-                                    <Typography variant='h6' m='auto' style={{ flexGrow: 0, justifyContent: 'start', color: 'white', textDecoration: 'none'}} component={Link} href='/'>
-                                        {process.env.NEXT_PUBLIC_WEBSITE_TITLE}
+                                    <Typography variant='h6' m='auto' style={{ flexGrow: 0, justifyContent: 'start', color: 'white', textDecoration: 'none' }} component={Link} href='/'>
+                                        <img src="/logo.png" ></img>
                                     </Typography>
 
+                                    <Stack direction="row" style={{ flexGrow: 1, justifyContent: 'center' }} display={{ xs: 'none', md: 'flex' }}>
+                                        {
+                                            menus.map((menu, key) => <Button key={key} color='inherit' component={Link} href={`${menu.path}`}>{menu.name}</Button>)
+                                        }
+                                    </Stack>
 
-                                <Stack direction="row" style={{ flexGrow: 1, justifyContent: 'center' }} display={{ xs: 'none', md: 'flex' }}>
-                                    {
-                                        menus.map((menu, key) => <Button key={key} color='inherit' component={Link} href={`${menu.path}`}>{menu.name}</Button>)
-                                    }
-                                </Stack>
-
-                                <Box display={{ xs: 'none', md: 'flex' }} component='form' onSubmit={goSearch}>
-                                    <TextField
-                                        size='small'
-                                        label='Pesquisar...'
-                                        variant='standard'
-                                        InputLabelProps={{ style: { padding: '0 15px', color: 'white' } }}
-                                        InputProps={{ disableUnderline: true }}
-                                        style={{ backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 25, width: '100%', padding: '0  10px' }}
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                    >
-                                    </TextField>
-                                    <IconButton color='inherit' type="submit">
-                                        <Icon>search</Icon>
-                                    </IconButton>
-                                </Box>
-
-                                {/* Exibir o Input de pesquisar em telas pequenas */}
-                                <Box display={{ xs: 'flex', md: 'none' }}>
-                                    <Box display={{ xs: searchDisplay ? 'none' : 'flex', md: 'none' }}>
-                                        <IconButton color='inherit' onClick={() => setSearchDisplay(true)}>
+                                    <Box display={{ xs: 'none', md: 'flex' }} component='form' onSubmit={goSearch}>
+                                        <TextField
+                                            size='small'
+                                            label='Pesquisar...'
+                                            variant='standard'
+                                            InputLabelProps={{ style: { padding: '0 15px', color: 'white' } }}
+                                            InputProps={{ disableUnderline: true }}
+                                            style={{ backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 25, width: '100%', padding: '0  10px' }}
+                                            value={search}
+                                            onChange={(e) => setSearch(e.target.value)}
+                                        >
+                                        </TextField>
+                                        <IconButton color='inherit' type="submit">
                                             <Icon>search</Icon>
                                         </IconButton>
                                     </Box>
-                                </Box>
 
-                                <Divider orientation="vertical" variant="middle" flexItem />
-                                <Box>
-                                    <UserButton />
-                                </Box>
-                                <Divider orientation="vertical" variant="middle" flexItem />
-                                <Box>
-                                    <DarkModeButton />
-                                </Box>
-                            </Toolbar>
-                        </Box>
-                    </Container>
+                                    {/* Exibir o Input de pesquisar em telas pequenas */}
+                                    <Box display={{ xs: 'flex', md: 'none' }}>
+                                        <Box display={{ xs: searchDisplay ? 'none' : 'flex', md: 'none' }}>
+                                            <IconButton color='inherit' onClick={() => setSearchDisplay(true)}>
+                                                <Icon>search</Icon>
+                                            </IconButton>
+                                        </Box>
+                                    </Box>
+
+                                    <Divider orientation="vertical" variant="middle" flexItem />
+                                        <Box>
+                                            <DarkModeButton />
+                                        </Box>
+                                    {
+                                        /*
+                                        <Divider orientation="vertical" variant="middle" flexItem />
+                                        <Box>
+                                            <UserButton />
+                                        </Box>
+                                        */
+                                    }
+
+                                </Toolbar>
+                            </Box>
+                        </Container>
+                    </Box>
+
                 </AppBar>
             </Box>
             {/* Input de pesquisar em telas pequenas */}

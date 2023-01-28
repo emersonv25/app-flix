@@ -21,7 +21,7 @@ export const MenuDrawer = (props: MenuDrawerProps) => {
             <Box display={{ xs: 'none', md: 'flex' }}>
                 <Drawer variant='temporary' anchor='left' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
                     <Box p={2} width='250px' textAlign='center' role='presentation'>
-                        <Typography variant='h6'>MeuFlix</Typography>
+                        <img src="/logo.png" ></img>
                     </Box>
                     <Divider></Divider>
                     <Box flex={1}>

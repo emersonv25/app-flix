@@ -2,7 +2,7 @@ import * as React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../src/utils/createEmotionCache';
-
+import Footer from '../src/components/footer/Footer';
 export default class MyDocument extends Document {
   render() {
     return (
@@ -22,10 +22,13 @@ export default class MyDocument extends Document {
           {(this.props as any).emotionStyleTags}
           <meta name='description' content={process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION} />
         </Head>
-        <body>
+        <body style={{minHeight:'100vh'}}>
           <Main />
           <NextScript />
         </body>
+        <footer>
+        <Footer />
+        </footer>
       </Html>
     );
   }
