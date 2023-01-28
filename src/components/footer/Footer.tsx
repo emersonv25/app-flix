@@ -10,9 +10,6 @@ export const Footer: FC = (): ReactElement => {
                     width: "100%",
                     height: "auto",
                     marginTop: '1rem',
-                    paddingTop: "0.5rem",
-                    paddingBottom: "0.5rem",
-                    backgroundColor:'black'
                 }}
             >
                 <Container maxWidth="lg">
@@ -24,17 +21,10 @@ export const Footer: FC = (): ReactElement => {
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography color="white" variant="subtitle1">
-                                {` ${process.env.NEXT_PUBLIC_WEBSITE_FOOTER_SUBTITLE1}`}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
                             <Typography color="white" variant="subtitle2">
-                                {` ${process.env.NEXT_PUBLIC_WEBSITE_FOOTER_SUBTITLE2}`}
+                                {` ${process.env.NEXT_PUBLIC_WEBSITE_FOOTER_SUBTITLE1}`} <Link href='/privacity-policy' style={{ color: 'white' }}>Política de Privacidade</Link> - <Link href='/dmca' style={{ color: 'white' }}> DMCA</Link>
                             </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Link href='/privacity-policy' style={{ color: 'white' }}>Política de Privacidade</Link> - <Link href='/dmca' style={{ color: 'white' }}> DMCA</Link>
+                            
                         </Grid>
                     </Grid>
                 </Container>
