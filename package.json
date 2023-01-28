@@ -1,6 +1,6 @@
 {
   "name": "myflix-app-nextjs",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -17,7 +17,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.11",
     "axios": "^1.1.3",
-    "next": "13.0.0",
+    "next": "13.1.6",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -26,13 +26,13 @@
   },
   "devDependencies": {
     "@types/node": "18.11.8",
-    "@types/react": "18.0.24",
-    "@types/react-dom": "18.0.8",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "eslint": "^8.26.0",
-    "eslint-config-next": "13.0.0",
+    "eslint-config-next": "13.1.6",
     "eslint-plugin-react": "^7.31.10",
-    "typescript": "4.8.4"
+    "typescript": "4.9.4"
   }
 }
