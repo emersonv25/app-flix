@@ -9,14 +9,16 @@ export default class MyDocument extends Document {
       <Html lang="pt-BR">
         <Head>
           {/* PWA primary color */}
-          <link rel="shortcut icon" href="/favicon.png" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192"/>
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png"/>
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
           />
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}

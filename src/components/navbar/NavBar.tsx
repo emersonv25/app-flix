@@ -47,7 +47,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
                                     <MenuDrawer menus={menus} />
 
                                     <Typography variant='h6' m='auto' style={{ flexGrow: 0, justifyContent: 'start', color: 'white', textDecoration: 'none' }} component={Link} href='/'>
-                                        <img src="/logo.png" ></img>
+                                        <img src="/logo.png" alt='AnimFlix' width='130' height='32' ></img>
                                     </Typography>
 
                                     <Stack direction="row" style={{ flexGrow: 1, justifyContent: 'center' }} display={{ xs: 'none', md: 'flex' }}>
@@ -68,7 +68,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
                                             onChange={(e) => setSearch(e.target.value)}
                                         >
                                         </TextField>
-                                        <IconButton color='inherit' type="submit">
+                                        <IconButton color='inherit' type="submit" aria-label='pesquisar'>
                                             <Icon>search</Icon>
                                         </IconButton>
                                     </Box>

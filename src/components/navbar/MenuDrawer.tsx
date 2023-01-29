@@ -1,4 +1,4 @@
-import {  Divider, Drawer, Icon, IconButton, List, ListItemButton, ListItemText } from "@mui/material"
+import { Divider, Drawer, Icon, IconButton, List, ListItemButton, ListItemText } from "@mui/material"
 import { Box } from "@mui/system"
 import Link from "next/link"
 import { useState } from "react"
@@ -21,7 +21,7 @@ export const MenuDrawer = (props: MenuDrawerProps) => {
             <Box display={{ xs: 'none', md: 'flex' }}>
                 <Drawer variant='temporary' anchor='left' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
                     <Box p={2} width='250px' textAlign='center' role='presentation'>
-                        <img src="/logo.png" ></img>
+                        <img src="/logo.png" alt='AnimFlix' width='130' height='32' ></img>
                     </Box>
                     <Divider></Divider>
                     <Box flex={1}>
