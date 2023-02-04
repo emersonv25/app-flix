@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
             resultMostView: resultMostView,
             resultEpisodes: resultEpisodes
         },
-        revalidate: 10
+        revalidate: 240
     }
 }
 
@@ -70,10 +70,10 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
                     <>
                         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
                             <Box sx={{ p: '10px' }}>
-                                <Typography variant="h5" component={Link} href='/browse?order=most_view&sort=desc' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold'}} color='inherit'>Populares</Typography>
+                                <Typography variant="h5" component={Link} href='/popular/1' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold'}} color='inherit'>Populares</Typography>
                             </Box>
                             <Box sx={{ display: 'flex' }}>
-                                <Button sx={{ alignSelf: 'center', borderRadius: '9px' }} color='primary' size='small' component={Link} href='/browse?order=most_view&sort=desc'>VER TODOS</Button>
+                                <Button sx={{ alignSelf: 'center', borderRadius: '9px' }} color='primary' size='small' component={Link} href='/popular/1'>VER TODOS</Button>
                             </Box>
                         </Box>
                         <Box>
@@ -89,10 +89,10 @@ const Home: NextPage<Props> = ({ resultMostView, resultLatestRelease, resultEpis
                     <>
                         <Box sx={{ flexDirection: 'row', display: 'flex' }}>
                             <Box sx={{ p: '10px' }}>
-                                <Typography variant="h5" component={Link} href='/browse?order=created_date&sort=desc' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold' }} color='inherit'>Lançamentos</Typography>
+                                <Typography variant="h5" component={Link} href='/releases/1' sx={{ textDecoration: "none", boxShadow: "none", fontWeight: 'bold' }} color='inherit'>Lançamentos</Typography>
                             </Box>
                             <Box sx={{ display: 'flex' }}>
-                                <Button sx={{ alignSelf: 'center', borderRadius: '9px' }} color='primary' size='small' component={Link} href='/browse?order=created_date&sort=desc'>VER TODOS</Button>
+                                <Button sx={{ alignSelf: 'center', borderRadius: '9px' }} color='primary' size='small' component={Link} href='/releases/1'>VER TODOS</Button>
                             </Box>
                         </Box>
                         {

@@ -2,6 +2,7 @@ import { Box, Card, CardContent, CardMedia, Chip, Grid, Icon, IconButton, Typogr
 import { Serie } from "../../@types/serie";
 import { FavoriteButton } from "../buttons/FavoriteButton";
 import Image from 'next/image'
+import Link from "next/link";
 
 
 type Props = {
@@ -50,7 +51,7 @@ export default function CardSerie({ serie }: Props) {
                                     </Typography>
                                     <Grid>
                                         {serie.categories?.map((name, key) =>
-                                            <Chip key={key} label={name} size="small" sx={{ m: 0.5 }} />
+                                                <Chip key={key} label={name} size="small" sx={{ m: 0.5 }}  clickable  component={Link} href={'/search/' + name.toLowerCase()}/>
                                         )}
                                     </Grid>
                                     <Typography variant="subtitle1" color="text.secondary" component="div" mt={2} sx={{ whiteSpace: "pre-line" }}>

@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async (context: Context) => {
         props: {
             episode: episode
         },
-        revalidate: 1000
+        revalidate: 3600
     }
 }
 

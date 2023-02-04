@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Box, CircularProgress, Container, Pagination } from "@mui/material";
-import {GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { Context } from "vm";
 import Head from 'next/head';
-import { Result } from '../../src/@types/result';
 import { useRouter } from 'next/router';
-import { getLastEpisodes } from '../../src/services/api';
-import GridCardEpisode from '../../src/components/cards/GridCardEpisode';
+import { getSeries } from '../../src/services';
+import GridCardPoster from '../../src/components/cards/GridCardPoster';
+import { Result } from '../../src/@types/result';
 
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
     return {
@@ -14,15 +14,19 @@ export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
         fallback: true,
     };
 };
+
 export const getStaticProps: GetStaticProps = async (context: Context) => {
-    const page: number = context.params.page;
-    const result: Result = await getLastEpisodes(page, 24)
+    const order: string = 'created_date'
+    const sort: string = 'desc'
+    const page: number = context.params.page || '1';
+    const result: Result = await getSeries(undefined, page, 24, order, sort)
+    const pageTitles = "Ultimos Lançamentos"
     return {
         props: {
             result: result,
-            title: "Ultimos Episódios Lançados"
+            title: pageTitles
         },
-        revalidate: 240
+        revalidate: 3600
     }
 }
 
@@ -31,12 +35,12 @@ type Props = {
     title: string
 }
 
-const EpisodesPage: NextPage<Props> = ({ result, title }: Props) => {
+const List: NextPage<Props> = ({ result, title }: Props) => {
     const router = useRouter()
-
+    
     function handlePage(event: any, value: any) {
         router.push({
-            pathname: '/episodes/' + value
+            pathname: '/releases/' + value
         })
     }
     if (router.isFallback) {
@@ -52,18 +56,19 @@ const EpisodesPage: NextPage<Props> = ({ result, title }: Props) => {
                 <Head>
                     <title>{`${title} - ${process.env.NEXT_PUBLIC_WEBSITE_TITLE}`}</title>
                 </Head>
-                <Box sx={{ pt: 5 }}>
+                <Box sx={{pt:5}}>
                     <Container maxWidth='lg'>
-                        <h2>{title}</h2>
                         {
                             result.totalResults == 0 && <h3>Nenhum resultado encontrado</h3>
                         }
                         {
-                            result.results &&
+                            result.results && 
                             <>
-
-                                <GridCardEpisode arrayCards={result.results}></GridCardEpisode>
-                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                <h2>
+                                    {title}
+                                </h2>
+                                <GridCardPoster arrayCards={result.results} ></GridCardPoster>
+                                <Box sx={{display: 'flex', justifyContent: 'center'}}>
                                     <Pagination count={result.totalPages} page={result.currentPage} onChange={handlePage} />
                                 </Box>
                             </>
@@ -76,4 +81,4 @@ const EpisodesPage: NextPage<Props> = ({ result, title }: Props) => {
 }
 
 
-export default EpisodesPage
+export default List
