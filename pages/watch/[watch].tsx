@@ -2,10 +2,11 @@ import { Box, CircularProgress, Container } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from 'next/head';
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { Context } from "vm";
 import { Episode } from "../../src/@types/serie";
 import CardWatch from "../../src/components/cards/CardWatch";
-import { getEpisodeByKey } from "../../src/services";
+import { addViewEpisode, getEpisodeByKey } from "../../src/services";
 
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
     return {
@@ -30,11 +31,21 @@ type Props = {
 
 const Watch: NextPage<Props> = ({ episode }: Props) => {
     const router = useRouter()
+
     const isEpisode = () => {
         if (JSON.stringify(episode) === "{}" || typeof episode === "undefined") {
             return false
         } else { return true }
     }
+
+    useEffect(() => {
+        if(isEpisode())
+        {
+            addViewEpisode(episode.episodeKey)
+        }
+    },[episode])
+
+
 
     if (router.isFallback) {
         return (

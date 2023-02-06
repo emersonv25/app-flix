@@ -61,8 +61,15 @@ export async function getSerieByKey(key : string)
   catch(err : any){ console.error('Err: getSeriesByKey: ' + key + ' : ' + err.response.data) }
   return serie
 }
+export async function addViewSerie(key? : string)
+{
+  try{
+    await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/series/addview/' + key)
+  }
+  catch(err : any){ console.error('Err: addViewEpisode: ' + key + ' : ' + err) }
+}
 
-export async function getEpisodeByKey(key : string)
+export async function getEpisodeByKey(key? : string)
 {
   let episode : Episode = {} as Episode;
   try{
@@ -71,6 +78,13 @@ export async function getEpisodeByKey(key : string)
   }
   catch(err : any){ console.error('Err: getEpisodeByKey: ' + key + ' : ' + err.response.data) }
   return episode
+}
+export async function addViewEpisode(key? : string)
+{
+  try{
+    await api.get(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/episodes/addview/' + key)
+  }
+  catch(err : any){ console.error('Err: addViewEpisode: ' + key + ' : ' + err) }
 }
 export async function getLastEpisodes(currentPage = 1, pageSize = 24)
 {

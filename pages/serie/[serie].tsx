@@ -7,7 +7,7 @@ import { Context } from "vm";
 import { Episode, Serie } from "../../src/@types/serie";
 import CardSerie from "../../src/components/cards/CardSerie";
 import GridCardEpisode from "../../src/components/cards/GridCardEpisode";
-import { getSerieByKey } from "../../src/services";
+import { addViewSerie, getSerieByKey } from "../../src/services";
 import { array_chunk_episode, dynamicSort } from "../../src/utils/utils";
 
 export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
@@ -39,10 +39,22 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
     const [episodesPaged, setEpisodesPaged] = useState<Episode[][] | null>(null)
     const [perPage, setPerPage] = useState(100)
     const [order, setOrder] = useState('episodeNum')
-
     const handleCurrentPage = (event: React.ChangeEvent<unknown>, value: number) => {
         setCurrentPage(value);
     };
+
+    const isSerie = () => {
+        if (JSON.stringify(serie) === "{}" || typeof serie === "undefined") {
+            return false
+        } else { return true }
+    }
+
+    useEffect(() => {
+        if(isSerie())
+        {
+            addViewSerie(serie.serieKey)
+        }
+    },[serie])
 
     useEffect(() => {
         setCurrentPage(1)
@@ -51,11 +63,6 @@ const Title: NextPage<Props> = ({ serie }: Props) => {
         }
     }, [seasonNum, perPage, order, serie])
 
-    const isSerie = () => {
-        if (JSON.stringify(serie) === "{}" || typeof serie === "undefined") {
-            return false
-        } else { return true }
-    }
 
     const router = useRouter()
     if (router.isFallback) {
