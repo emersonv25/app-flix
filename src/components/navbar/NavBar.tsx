@@ -33,14 +33,14 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
 
     function goSearch(event: any) {
         event.preventDefault();
-        router.push('/search/' + search);
+        router.push('/search/' + search.trim());
     }
 
     return (
         <>
             <Box width="100%">
                 <AppBar position='static'>
-                    <Box style={{backgroundColor: 'black'}}>
+                    <Box style={{ backgroundColor: 'black' }}>
                         <Container maxWidth='xl'>
                             <Box>
                                 <Toolbar>
@@ -61,19 +61,18 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
                                             size='small'
                                             label='Pesquisar...'
                                             variant='standard'
-                                            InputLabelProps={{ style: { padding: '0 15px', color: 'white' } }}
-                                            InputProps={{ disableUnderline: true }}
-                                            style={{ backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 25, width: '100%', padding: '0  10px' }}
+                                            InputLabelProps={{ style: { color: 'white' } }}
+                                            sx={{"& .MuiInput-underline::before": { borderBottomColor: "white" }}}
                                             value={search}
                                             onChange={(e) => setSearch(e.target.value)}
                                         >
                                         </TextField>
-                                        <IconButton color='inherit' type="submit" aria-label='pesquisar'>
+                                        <IconButton color='inherit' type="submit" aria-label='pesquisar' disabled={!search.trim()}>
                                             <Icon>search</Icon>
                                         </IconButton>
                                     </Box>
 
-                                    {/* Exibir o Input de pesquisar em telas pequenas */}
+                                    {/* Exibir o Input de pesquisar em telas grandes*/}
                                     <Box display={{ xs: 'flex', md: 'none' }}>
                                         <Box display={{ xs: searchDisplay ? 'none' : 'flex', md: 'none' }}>
                                             <IconButton color='inherit' onClick={() => setSearchDisplay(true)}>
@@ -83,9 +82,9 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
                                     </Box>
 
                                     <Divider orientation="vertical" variant="middle" flexItem />
-                                        <Box>
-                                            <DarkModeButton />
-                                        </Box>
+                                    <Box>
+                                        <DarkModeButton />
+                                    </Box>
                                     {
                                         /*
                                         <Divider orientation="vertical" variant="middle" flexItem />
@@ -110,15 +109,13 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
                             size='small'
                             label='Pesquisar...'
                             variant='standard'
-                            InputLabelProps={{ style: { padding: '0 15px' } }}
-                            InputProps={{ disableUnderline: true }}
-                            style={{ backgroundColor: themeName == 'dark' ? 'rgba(255,255,255,0.2)' : 'pink', borderRadius: 25, width: '100%', padding: '0  10px' }}
+                            InputLabelProps={{ style: { color: themeName == 'dark' ? 'white' : 'black' } }}
+                            sx={{"& .MuiInput-underline::before": { borderBottomColor: themeName == 'dark' ? 'white' : 'black' }}}
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         >
-
                         </TextField>
-                        <IconButton color='inherit' type="submit">
+                        <IconButton color='inherit' type="submit" disabled={!search.trim()}>
                             <Icon>search</Icon>
                         </IconButton>
                         <IconButton color='inherit' onClick={() => setSearchDisplay(false)}>
