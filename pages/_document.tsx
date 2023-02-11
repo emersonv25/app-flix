@@ -22,18 +22,7 @@ export default class MyDocument extends Document {
           />
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
-          <meta name='description' content={process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION} />
-          {{
-            /*
-               <script data-cfasync="false" type="text/javascript" src='./static/ads/push_banner_1.js'></script>
-              <script src='./static/ads/push_banner_2.js'></script>
-
-              <script data-cfasync="false" type="text/javascript" src='./static/ads/vinheta_banner_1.js'></script>
-              <script src='./static/ads/vinheta_banner_2.js'></script>
-            */
-          }}
-
-          
+          <meta name='description' content={process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION} />   
         </Head>
         <body style={{minHeight:'100vh'}}>
           <Main />
