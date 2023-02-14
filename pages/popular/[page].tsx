@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async (context: Context) => {
     const order: string = 'most_view'
     const sort: string = 'desc'
     const page: number = context.params.page || '1';
-    const result: Result = await getSeries(undefined, page, 24, order, sort)
+    const result: Result = await getSeries(undefined, page, 48, order, sort)
     const pageTitles = "Mais Populares"
     return {
         props: {

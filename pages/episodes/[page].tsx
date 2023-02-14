@@ -16,7 +16,7 @@ export const getStaticPaths: GetStaticPaths<{ serie: string }> = async () => {
 };
 export const getStaticProps: GetStaticProps = async (context: Context) => {
     const page: number = context.params.page;
-    const result: Result = await getLastEpisodes(page, 24)
+    const result: Result = await getLastEpisodes(page, 48)
     return {
         props: {
             result: result,
