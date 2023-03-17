@@ -4,7 +4,7 @@ import { getServerSideSitemap, ISitemapField } from "next-sitemap";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const series: string[] = await axios
-        .get("https://api.animflix.net/api/Series/getSerieKeyList")
+        .get(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/Series/getSerieKeyList")
         .then((res) => res.data);
 
     const fields: ISitemapField[] = series.map((uri) => {

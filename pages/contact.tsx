@@ -6,7 +6,7 @@ const Contact: NextPage = () => {
     return (
         <Container>
             <h1> Entrar em contato </h1>
-            <div>Envie um email para animflixnet@gmail.com</div>
+            <div>Envie um email para {process.env.NEXT_PUBLIC_WEBSITE_EMAIL}</div>
         </Container>
     )
 }
