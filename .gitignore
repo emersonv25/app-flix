@@ -1,6 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # ignore
+hfavicon.png
+hfavicon.ico
+hlogo.png
 robots.txt
 sitemap-0.xml
 sitemap.xml

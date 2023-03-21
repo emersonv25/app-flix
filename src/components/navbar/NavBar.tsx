@@ -47,7 +47,7 @@ export const NavBar: React.FC<NavbarProps> = ({ children }: NavbarProps) => {
                                     <MenuDrawer menus={menus} />
 
                                     <Typography variant='h6' m='auto' style={{ flexGrow: 0, justifyContent: 'start', color: 'white', textDecoration: 'none' }} component={Link} href='/'>
-                                        <img src="/logo.png" alt={process.env.NEXT_PUBLIC_WEBSITE_TITLE} width='130' height='32' ></img>
+                                        <img src={process.env.NEXT_PUBLIC_WEBSITE_LOGO_PATH}  alt={process.env.NEXT_PUBLIC_WEBSITE_TITLE} height='32' ></img>
                                     </Typography>
 
                                     <Stack direction="row" style={{ flexGrow: 1, justifyContent: 'center' }} display={{ xs: 'none', md: 'flex' }}>

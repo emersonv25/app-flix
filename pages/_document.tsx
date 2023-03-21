@@ -9,9 +9,9 @@ export default class MyDocument extends Document {
       <Html lang="pt-BR">
         <Head>
           {/* PWA primary color */}
-          <link rel="shortcut icon" href="/favicon.ico" />
-          <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192"/>
-          <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png"/>
+          <link rel="shortcut icon" href={process.env.NEXT_PUBLIC_WEBSITE_FAVICON_ICO_PATH} />
+          <link rel="icon" type="image/png" href={process.env.NEXT_PUBLIC_WEBSITE_FAVICON_PNG_PATH} sizes="192x192"/>
+          <link rel="apple-touch-icon" sizes="180x180" href={process.env.NEXT_PUBLIC_WEBSITE_FAVICON_PNG_PATH}/>
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

@@ -21,7 +21,7 @@ export const MenuDrawer = (props: MenuDrawerProps) => {
             <Box display={{ xs: 'none', md: 'flex' }}>
                 <Drawer variant='temporary' anchor='left' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
                     <Box p={2} width='250px' textAlign='center' role='presentation'>
-                        <img src="/logo.png" alt={process.env.NEXT_PUBLIC_WEBSITE_TITLE} width='130' height='32' ></img>
+                        <img src={process.env.NEXT_PUBLIC_WEBSITE_LOGO_PATH} alt={process.env.NEXT_PUBLIC_WEBSITE_TITLE} height='32' ></img>
                     </Box>
                     <Divider></Divider>
                     <Box flex={1}>
